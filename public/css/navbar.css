@@ -1,4 +1,22 @@
-ul {
+.logo{
+    width: 65px;
+}
+
+nav ul {
     display: flex;
-    list-style-type: none;
+    list-style: none;
+    justify-content: center;
+}
+
+.navbar{
+    font-size: 25px;
+    margin: 0;
+}
+
+li{
+    padding: 15px;
+}
+
+ul{
+    margin: 0;
 }

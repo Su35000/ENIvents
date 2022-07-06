@@ -1,6 +1,7 @@
 <nav>
     <ul>
         {% if app.user %}
+            <li><a href="{{ path('sortie_home') }}"><img class="logo" src="{{ asset('img/logo.svg') }}" alt="Enivents !"></a></li>
             <li><a href="{{ path('sortie_home') }}" title="Home">Home</a></li>
             <li><a href="{{ path('app_logout') }}" title="Logout">Logout</a></li>
         {% endif %}
