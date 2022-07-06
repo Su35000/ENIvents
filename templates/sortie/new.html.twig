@@ -8,6 +8,8 @@
 {% block body %}
 {{ form_start(sortieForm) }}
 {{ form_widget(sortieForm) }}
+    {#  {{ form_row(sortieForm.lieu) }}#}
+<button class="add"> Ajouter un lieu </button>
 <button> Crée l'événement ! </button>
 {{ form_end(sortieForm) }}
 {% endblock %}

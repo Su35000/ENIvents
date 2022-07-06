@@ -37,6 +37,7 @@ class SortieType extends AbstractType
                 'label' => 'Description'
             ])
             ->add('lieu', EntityType::class,[
+                'label' => 'Lieu',
                 'class'=> Lieu::class,
                 'choice_label' => function(?Lieu $lieu) {
                     return $lieu ? strtoupper($lieu->getNom()) : '';}
