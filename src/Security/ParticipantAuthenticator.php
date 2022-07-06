@@ -28,6 +28,8 @@ class ParticipantAuthenticator extends AbstractLoginFormAuthenticator
         $this->urlGenerator = $urlGenerator;
     }
 
+
+
     public function authenticate(Request $request): Passport
     {
         $username = $request->request->get('username', '');

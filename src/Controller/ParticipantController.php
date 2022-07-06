@@ -12,7 +12,7 @@ class ParticipantController extends AbstractController
     #[Route('/participant', name: 'app_participant')]
     public function list(): Response
     {
-        return $this->render('participant/index.html.twig', [
+        return $this->render('participant/home.html.twig', [
             'controller_name' => 'ParticipantController',
         ]);
     }
