@@ -4,9 +4,15 @@
 }
 
 body{
-    font-family: 'Bebas-Regular',"Roboto Light", "Roboto Thin", serif;
+    font-family: 'Nunito',"Roboto Light", "Roboto Thin", serif;
 }
 
 .logo{
     width: 50%;
+}
+
+.form{
+    border: black solid;
+    margin: 13% 27%;
+    text-align: center;
 }
