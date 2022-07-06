@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+{{ parent() }} | New évènement
+{% endblock %}
+
+{% block body %}
+{{ form_start(sortieForm) }}
+{{ form_widget(sortieForm) }}
+<button> Crée l'événement ! </button>
+{{ form_end(sortieForm) }}
+{% endblock %}

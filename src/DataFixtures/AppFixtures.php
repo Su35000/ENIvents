@@ -106,6 +106,8 @@ class AppFixtures extends Fixture
 
     private function ajoutSortie(){
 
+
+        for ($i = 0; $i < 10; $i++) {
         $sortie = new Sortie();
         $sortie->setOrganisateur($this->ajoutParticipant())
             ->setLieu($this->ajoutLieu())
@@ -113,9 +115,12 @@ class AppFixtures extends Fixture
             ->setNom($this->generator->randomElement(['Découverte des plantes sauvages','Les Nuits Celtiques','Randonnée et Cueillette', 'Balade contée à vélo','Apéro Klam',' Escape Game','Cours de cuisine', 'Laser Game', 'Grosse Murge', 'Paint-ball','Accrobranche','Randonnée en Quad','Simulateur de chute-libre','WarpZone Rennes','Picnic au parc', 'Apéro Défonce', 'Restaurant Pizza', 'Concert métal', 'Speed Dating', 'Sortie bien être', 'Initiation Yoga', 'Boeuf jazz', 'Jam Session', 'Poker', 'Nuit : classiques du cinéma']))
             ->setDateHeureDebut($this->generator->dateTime)
             ->setDateCloture($this->generator->dateTime)
-            ->setDuree($this->generator->numberBetween(60,120))
+            ->setDuree($this->generator->numberBetween(1,48))
             ->setNbInscritMax($this->generator->numberBetween(2,50))
             ->setDescription($this->generator->words(50, true));
+            $this->manager->persist($sortie);
+        }
+        $this->manager->flush();
     }
 
     private function ajoutLieu(){

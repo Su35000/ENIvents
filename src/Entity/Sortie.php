@@ -36,11 +36,11 @@ class Sortie
     #[ORM\OneToMany(mappedBy: 'sortie', targetEntity: Inscription::class)]
     private $inscriptions;
 
-    #[ORM\ManyToOne(targetEntity: Lieu::class, inversedBy: 'sortie')]
+    #[ORM\ManyToOne(targetEntity: Lieu::class, cascade: ['persist'], inversedBy: 'sortie')]
     #[ORM\JoinColumn(nullable: false)]
     private $lieu;
 
-    #[ORM\ManyToOne(targetEntity: Etat::class, inversedBy: 'sortie')]
+    #[ORM\ManyToOne(targetEntity: Etat::class, cascade: ['persist'], inversedBy: 'sortie')]
     #[ORM\JoinColumn(nullable: false)]
     private $etat;
 
