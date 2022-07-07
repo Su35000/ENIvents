@@ -7,10 +7,13 @@
     <h1>Edit Profil</h1>
 
     {{ form_start(profilForm) }}
-    {{ form_widget(profilForm) }}
-{#
-    {{ form_row(profilForm.username, {'label': 'foo'}) }}
-#}
+    {{ form_row(profilForm.username, {label: "Pseudo"}) }}
+    {{ form_row(profilForm.nom) }}
+    {{ form_row(profilForm.prenom) }}
+    {{ form_row(profilForm.telephone) }}
+    {{ form_row(profilForm.email) }}
+    {{ form_row(profilForm.password, {value: ''}, {label: 'Mot de passe'}) }}
+
     <button>Edit profil</button>
     {{ form_end(profilForm) }}
 {% endblock %}
