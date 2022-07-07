@@ -16,7 +16,7 @@
         {% if error %}
             <div class="error-msg">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+        <input type="text" value="{{ last_username }}" name="identifier" id="inputIdentifier" class="form-control" autocomplete="identifier" required autofocus>
         <br>
         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
         <br>

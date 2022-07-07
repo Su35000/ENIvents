@@ -7,7 +7,10 @@
     <h1>Edit Profil</h1>
 
     {{ form_start(profilForm) }}
-    {{ form_start(profilForm) }}
+    {{ form_widget(profilForm) }}
+{#
+    {{ form_row(profilForm.username, {'label': 'foo'}) }}
+#}
     <button>Edit profil</button>
     {{ form_end(profilForm) }}
 {% endblock %}
