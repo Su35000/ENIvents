@@ -23,20 +23,19 @@ class LieuController extends AbstractController
         $lieuForm = $this->createForm(LieuType::class, $lieu);
         $lieuForm->handleRequest(($request));
 
+
         if ($lieuForm->isSubmitted() && $lieuForm->isValid()) {
 
             $lieuRepository->add($lieu, true);
 
-            $this->addFlash('success', "L'évènement à bien été crée");
             $this->addFlash('success', "Le lieu a bien été ajouté.");
-            return $this->redirectToRoute('sortie_new', [
-                'lieu' => $lieu
-            ]);
-        }
 
+            return $this->redirectToRoute('sortie_new');
+        }
+        var_dump($lieu);
 
         return $this->render('lieu/new.html.twig', [
-            'controller_name' => 'LieuController',
+            'lieuForm' => $lieuForm->createView()
         ]);
     }
 
@@ -60,14 +59,14 @@ class LieuController extends AbstractController
 
             $this->addFlash('success', "Le lieu a bien été modifié.");
 
-            return $this->redirectToRoute('sortie_new', [
+            return $this->redirectToRoute('main_home', [
                 'lieu' => $lieu
             ]);
         }
 
 
         return $this->render('lieu/new.html.twig', [
-            'controller_name' => 'LieuController',
+            'lieuForm' => $lieuForm->createView()
         ]);
     }
 

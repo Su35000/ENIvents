@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+    {{ parent() }} | New lieu
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(lieuForm) }}
+    {{ form_widget(lieuForm) }}
+    <button> Crée l'événement ! </button>
+    {{ form_end(lieuForm) }}
+
+
+
+
+{% endblock %}

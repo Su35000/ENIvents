@@ -4,6 +4,7 @@
             <li><a href="{{ path('sortie_home') }}"><img class="logo" src="{{ asset('img/logo.svg') }}" alt="Enivents !"></a></li>
             <li><a href="{{ path('sortie_home') }}" title="Home">Home</a></li>
             <li><a href="{{ path('app_logout') }}" title="Logout">Logout</a></li>
+            <li><a href="{{ path('sortie_new') }}" title="Organiser un évènement">Nouvelle Sortie</a></li>
         {% endif %}
         {% if is_granted("ROLE_ADMIN") %}
         {% endif %}
