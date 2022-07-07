@@ -19,7 +19,7 @@ class SortieController extends AbstractController
     #[Route('', name: 'home')]
     public function home(): Response
     {
-        return $this->render('sortie/home.html.twig');
+        return $this->render('sortie/edit.html.twig');
     }
 
 
@@ -27,6 +27,8 @@ class SortieController extends AbstractController
     public function new(Request $request, SortieRepository $sortieRep): Response
     {
         $sortie = new Sortie();
+        $sortie->setDateHeureDebut(new \DateTime());
+        $sortie->setDateCloture(new \DateTime());
 
         /**
          *
@@ -105,7 +107,9 @@ class SortieController extends AbstractController
                 'id' => $sortie->getId()
             ]);
         }
-        return $this->render('sortie/edit.html.twig');
+        return $this->render('sortie/edit.html.twig',[
+            'sortieForm' => $sortieForm->createView()
+        ]);
     }
 
 }

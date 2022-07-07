@@ -127,7 +127,7 @@ class AppFixtures extends Fixture
 
         $lieu = new Lieu();
         $lieu->setVille($this->ajoutVille())
-            ->setNom($this->generator->domainName)
+            ->setNom($this->generator->title)
             ->setLatitude($this->generator->latitude)
             ->setLongitude($this->generator->longitude)
             ->setRue($this->generator->streetName);

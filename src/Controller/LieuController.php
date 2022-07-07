@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Lieu;
+use App\Entity\Ville;
 use App\Form\LieuType;
 use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
@@ -25,6 +26,21 @@ class LieuController extends AbstractController
 
 
         if ($lieuForm->isSubmitted() && $lieuForm->isValid()) {
+
+//            /**
+//             * @var Ville $ville
+//             */
+//
+//            $nomVille = $lieuForm->get('ville')->getData();
+//            $cpo = $lieuForm->get('cpo')->getData();
+//
+//            $ville->setNom($nomVille);
+//            $ville->setCodePostal($cpo);
+
+            $coordonnees = explode(',',$lieuForm->get('coordonnees')->getData());
+
+            $lieu->setLatitude(floatval($coordonnees[0]));
+            $lieu->setLongitude(floatval($coordonnees[1]));
 
             $lieuRepository->add($lieu, true);
 

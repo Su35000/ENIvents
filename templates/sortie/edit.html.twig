@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Sorties : Home page </h1>
+
+    {{ form_start(sortieForm) }}
+    {{ form_widget(sortieForm) }}
+    {#  {{ form_row(sortieForm.lieu) }}#}
+    <button class="add"> Ajouter un lieu </button>
+    <button> Crée l'événement ! </button>
+    {{ form_end(sortieForm) }}
+
+
+
+{% endblock %}
+
+{% block title %}Modifier la sortie{% endblock %}

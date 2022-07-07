@@ -8,8 +8,11 @@
 {% block body %}
 
     {{ form_start(lieuForm) }}
+    {{ form_row(lieuForm.ville) }}
     {{ form_widget(lieuForm) }}
-    <button> Crée l'événement ! </button>
+
+    <button> Ajouter ce nouveau lieu </button>
+    <button class="add" title="Ajouter une ville"> Ajouter une ville </button>
     {{ form_end(lieuForm) }}
 
 

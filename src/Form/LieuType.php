@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Lieu;
+use App\Entity\Ville;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,9 +17,20 @@ class LieuType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('rue', TextType::class)
-            ->add('latitude', TextType::class)
-            ->add('longitude', TextType::class)
-            ->add('ville', TextType::class)
+            ->add('coordonnees',TextType::class, [
+                'mapped' =>false,
+                'required'=>false
+            ])
+            ->add('ville', EntityType::class,[
+                'label' => 'Ville',
+                'class'=> Ville::class,
+                'choice_label' => function(?Ville $ville) {
+                    return $ville ? strtoupper($ville->getNom()) : '';}
+            ])
+//            ->add('cpo', TextType::class,[
+//                'label' => 'Code Postal',
+//                'mapped' =>false
+//            ])
         ;
     }
 
