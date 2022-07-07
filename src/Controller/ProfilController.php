@@ -8,13 +8,14 @@ use App\Repository\ParticipantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/profil', name: 'profil_')]
 class ProfilController extends AbstractController
 {
     #[Route('/edit', name: 'edit')]
-    public function edit(ParticipantRepository $participantRepository, Request $request): Response
+    public function edit(UserPasswordHasherInterface $userPasswordHasher, ParticipantRepository $participantRepository, Request $request): Response
     {
 
         $participant =  $this->getUser();
@@ -37,6 +38,12 @@ class ProfilController extends AbstractController
         $profilForm->handleRequest($request);
 
         if($profilForm->isSubmitted() && $profilForm->isValid()){
+            $participant->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $participant,
+                    $profilForm->get('password')->getData()
+                )
+            );
             $participantRepository->add($profil, true);
 
             $this->addFlash("success", "Profil modifié !");
