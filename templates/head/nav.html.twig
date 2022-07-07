@@ -2,6 +2,8 @@
     <ul>
         {% if app.user %}
             <li><a href="{{ path('sortie_home') }}"><img class="logo" src="{{ asset('img/logo.svg') }}" alt="Enivents !"></a></li>
+            <li><a href="{{ path('ville_edit') }}" title="Home">Villes</a></li>
+         {# <li><a href="{{ path('sortie_home') }}" title="Home">Sites</a></li>#}
             <li><a href="{{ path('sortie_home') }}" title="Home">Home</a></li>
             <li><a href="{{ path('profil_edit') }}" title="Home">Mon profil</a></li>
             <li><a href="{{ path('app_logout') }}" title="Logout">Logout</a></li>

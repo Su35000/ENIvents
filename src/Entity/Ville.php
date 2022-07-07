@@ -21,7 +21,9 @@ class Ville
     #[ORM\Column(type: 'string', length: 10)]
     private $codePostal;
 
+
     #[ORM\OneToMany(mappedBy: 'ville', targetEntity: Lieu::class)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "cascade")]
     private $lieux;
 
     public function __construct()
