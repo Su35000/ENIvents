@@ -3,6 +3,11 @@
     src: url("/public/font/Bebas-Regular.ttf") format("ttf");
 }
 
+element {
+    --jaune-bg-color: #cbf801;
+    --rouge-bg-color: #ee403d;
+}
+
 html,body{ margin:0; padding:0; height:100%; width:100%; }
 #full-size{
     height:100%;
@@ -25,16 +30,24 @@ body{
     color: white;
     font-weight: bold;
     border: none;
-    width: 75%;
+    margin: 10px 0 0 0;
+    padding: 17px 30px;
     border-radius: 3px;
 }
 
-.logo{
-    width: 50%;
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .logo-login{
-
+    position: relative;
+    bottom: 68px;
 }
 
 .login-form{
@@ -44,8 +57,7 @@ body{
     border-radius: 15%;
     text-align: center;
     display: flex;
-    flex-wrap: wrap;
-    align-content: space-between;
+    flex-direction: column;
 }
 
 .login-template{
