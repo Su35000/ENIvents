@@ -2,17 +2,46 @@
 
 
 {% block body %}
-    <h1>Sorties : Home page </h1>
+    <div class="titre"><h1>Nouvelle Sortie</h1></div>
 
- {#   {{ form_start(sortieForm) }}
-    {{ form_widget(sortieForm) }}
-    #}{#  {{ form_row(sortieForm.lieu) }}#}{#
-    <button class="add"> Ajouter un lieu </button>
-    <button> Crée l'événement ! </button>
-    {{ form_end(sortieForm) }}
+    <div id="full-size">
+        <div class="formulaire">
 
+            {{ form_start(sortieForm) }}
+            {{ form_row(sortieForm.nom) }}
+            <div class="div_form">
+                <div class="div_form">
+                    {{ form_row(sortieForm.dateHeureDebut) }}
+                    {{ form_row(sortieForm.dateCloture) }}
+                </div>
+                <div class="div_form">
+                    {{ form_row(sortieForm.nbInscritMax) }}
+                    {{ form_row(sortieForm.duree) }}
+                </div>
+            </div>
+            {{ form_row(sortieForm.description) }}
+            <div class="div_form">
+                {{ form_row(sortieForm.lieu) }}
+                <button class="btn"> Ajouter un lieu</button>
+            </div>
+            {{ form_start(sortieForm) }}
+            {{ form_widget(sortieForm) }}
+            {#  {{ form_row(sortieForm.lieu) }} #}
 
-#}
+            <button class="btn-login"> Modifier la sortie !</button>
+            {{ form_end(sortieForm) }}
+
+        </div>
+    </div>
+
 {% endblock %}
 
-{% block title %}Modifier la sortie{% endblock %}
+{% block extrastyles %}
+
+    <script type="text/javascript">
+        var chemin = "{{ app.request.getBaseURL() }}";
+        ChangeIt();
+    </script>
+{% endblock %}
+
+

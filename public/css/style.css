@@ -82,6 +82,7 @@ input[type=text], input[type=password] {
     background-color: rgb(255 255 255 / 48%);
     border-radius: 15%;
     text-align: center;
+    margin-top: 150px;
     display: flex;
     flex-direction: column;
 }
@@ -133,7 +134,7 @@ label {
     flex-wrap: wrap;
     width: 90%;
     margin-left: auto;
-    margin-left: auto;
+    margin-right: auto;
 }
 
 @media screen and (min-width: 700px) {

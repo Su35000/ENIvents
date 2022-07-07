@@ -4,7 +4,7 @@
 
 {% block body %}
     <div id="full-size">
-        <div class="login-form">
+        <div class="login-form form">
             <img class="logo-login" src="{{ asset('img/logo.svg') }}" alt="logo">
             <form method="post">
                 {# {% if app.user %}
@@ -34,8 +34,14 @@
                     SE CONNECTER
                 </button>
 
-
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block extrastyles %}
+    <script type="text/javascript">
+        var chemin = "{{ app.request.getBaseURL() }}";
+        ChangeIt();
+    </script>
 {% endblock %}

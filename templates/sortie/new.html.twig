@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    {{ parent() }} | New évènement
+    {{ parent() }} | Nouvel événement
 {% endblock %}
 
 {% block body %}
@@ -41,7 +41,9 @@
 {% endblock %}
 
 {% block extrastyles %}
+
     <script type="text/javascript">
+        var chemin = "{{ app.request.getBaseURL() }}";
         ChangeIt();
     </script>
 {% endblock %}
