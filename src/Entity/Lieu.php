@@ -31,7 +31,7 @@ class Lieu
     private $sortie;
 
     #[ORM\ManyToOne(targetEntity: Ville::class, inversedBy: 'lieux')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "cascade")]
     private $ville;
 
     public function __construct()

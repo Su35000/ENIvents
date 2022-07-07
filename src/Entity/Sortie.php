@@ -37,7 +37,7 @@ class Sortie
     private $inscriptions;
 
     #[ORM\ManyToOne(targetEntity: Lieu::class, cascade: ['persist'], inversedBy: 'sortie')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "cascade")]
     private $lieu;
 
     #[ORM\ManyToOne(targetEntity: Etat::class, cascade: ['persist'], inversedBy: 'sortie')]
