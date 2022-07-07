@@ -19,7 +19,7 @@ class SortieController extends AbstractController
     #[Route('', name: 'home')]
     public function home(): Response
     {
-        return $this->render('sortie/edit.html.twig');
+        return $this->render('sortie/home.html.twig');
     }
 
 

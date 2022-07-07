@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Bebas-Regular";
-    src: url("/public/font/Bebas-Regular.ttf") format("ttf");
+    src: url("../font/Bebas-Regular.ttf")format("truetype");
 }
 
 element {
@@ -8,31 +8,53 @@ element {
     --rouge-bg-color: #ee403d;
 }
 
-html,body{ margin:0; padding:0; height:100%; width:100%; }
-#full-size{
-    height:100%;
-    width:100%;
-    overflow:hidden;
-    background-image: url("../img/background-login.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/*#full-size {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    overflow: hidden;*/
+/*    background-image: url("../img/background-login.svg");*/
+/*    background-repeat: no-repeat;*/
+/*    background-size: cover;*/
+/*    display: flex;*/
+/*    justify-content: space-around;*/
+/*    align-items: center;*/
+/*}*/
+
+#full-size {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-body{
-    font-family: 'Nunito',"Roboto Light", "Roboto Thin", serif;
+body {
+    font-family: 'Nunito', "Roboto Light", "Roboto Thin", serif;
 }
 
-.btn-login{
-    background-color: rgb(255 137 43);
+.btn-login {
+    background-color: #ee403d;
+    font-family: Bebas-Regular, sans-serif;
+    padding: 15px;
     color: white;
-    font-weight: bold;
+    font-size: 20px;
     border: none;
     margin: 10px 0 0 0;
-    padding: 17px 30px;
-    border-radius: 3px;
+    border-radius: 8px;
 }
 
 input[type=text], input[type=password] {
@@ -41,18 +63,22 @@ input[type=text], input[type=password] {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
     box-sizing: border-box;
 }
 
-.logo-login{
-    position: relative;
-    bottom: 68px;
+.logo-login {
+    position: absolute;
+    width: 120%;
+    top: -100px;
+    left: -50px;
 }
 
-.login-form{
-    padding: 2%;
-    height: 40%;
+.login-form {
+    padding: 10% 6% 2%;
+    height: 50%;
+    width: 30%;
+    position: relative;
     background-color: rgb(255 255 255 / 48%);
     border-radius: 15%;
     text-align: center;
@@ -60,12 +86,58 @@ input[type=text], input[type=password] {
     flex-direction: column;
 }
 
-.login-template{
+.login-template {
 }
 
-.error-msg{
+.error-msg {
     background-color: rgb(255 0 0 / 52%);
     border-radius: 20px;
     border: black solid 1px;
     font-weight: bold;
+}
+
+label {
+    display: block;
+}
+
+.formulaire {
+    padding: 2% 6% 2%;
+    height: 70%;
+    width: 70%;
+    /*background-color: rgb(255 255 255 / 48%);*/
+    border-radius: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    background: rgba( 255, 255, 255, 48% );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.titre{
+    font-family: Bebas-Regular, sans-serif;
+    color: white;
+    font-size: 40px;
+    display: inline;
+    text-align: center;
+    text-decoration: overline #cbf801;
+}
+
+.div_form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-left: auto;
+    margin-left: auto;
+}
+
+@media screen and (min-width: 700px) {
+    .serie-details {
+        grid-template-columns: 300px 1fr;
+    }
 }

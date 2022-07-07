@@ -3,35 +3,39 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div id="full-size">
-<div class="form login-form">
-    <img class="logo-login" src="{{ asset('img/logo.svg') }}" alt="logo">
-    <form method="post">
-        {#{% if app.user %}
+    <div id="full-size">
+        <div class="login-form">
+            <img class="logo-login" src="{{ asset('img/logo.svg') }}" alt="logo">
+            <form method="post">
+                {# {% if app.user %}
             <div class="mb-3">
                 You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
             </div>
-        {% endif %}#}
+        {% endif %} #}
 
-        {% if error %}
-            <div class="error-msg">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-        <input type="text" value="{{ last_username }}" name="identifier" id="inputIdentifier" class="form-control" autocomplete="identifier" required autofocus>
-        <br>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-        <br>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                {% if error %}
+                    <div class="error-msg">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <input type="text" value="{{ last_username }}" name="identifier" id="inputIdentifier"
+                       class="form-control" autocomplete="identifier" required autofocus>
+                <br>
+                <input type="password" name="password" id="inputPassword" class="form-control"
+                       autocomplete="current-password" required>
+                <br>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Se souvenir de moi
-            </label>
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                    </label>
+                </div>
+
+                <button class="btn-login" type="submit">
+                    SE CONNECTER
+                </button>
+
+
+            </form>
         </div>
-
-        <button class="btn-login" type="submit">
-            SE CONNECTER
-        </button>
-    </form>
-</div>
-</div>
+    </div>
 {% endblock %}
