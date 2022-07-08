@@ -75,7 +75,7 @@ class AppFixtures extends Fixture
     private function ajoutParticipants()
     {
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $participant = new Participant();
             $participant->setNom($this->generator->lastName)
                 ->setPrenom($this->generator->firstName)
@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
     private function ajoutSortie(){
 
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
         $sortie = new Sortie();
         $sortie->setOrganisateur($this->ajoutParticipant())
             ->setLieu($this->ajoutLieu())
