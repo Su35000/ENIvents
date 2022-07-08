@@ -29,7 +29,7 @@ class SearchSortieType extends AbstractType
                 return $site ? ['class' => 'site_'.strtolower($site->getNom())] : [];
                 }
             ])
-            ->add('bzbz', SearchType::class)
+            ->add('le_nom_de_la_sortie_contient', SearchType::class)
             ->add('Entre', DateTimeType::class, [
                 'html5' => true,
                 'widget' => 'single_text'

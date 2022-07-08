@@ -9,8 +9,8 @@ use App\Entity\Sortie;
 use App\Form\SearchSortieType;
 use App\Form\SortieType;
 use App\Repository\InscriptionRepository;
-use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Repository\ParticipantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -127,28 +127,39 @@ class SortieController extends AbstractController
     }
 
     #[Route('/enlist/{id}', name: 'enlist')]
-    public function enlist(int $id, Request $request, /*SortieRepository $sortieRep,  ParticipantRepository $participantRepository*/ InscriptionRepository $inscriptionRepository): Response
+    public function enlist(int $id, Request $request, SortieRepository $sortieRep,ParticipantRepository $participantRepository, InscriptionRepository $inscriptionRepository): Response
     {
         $inscription = new Inscription();
 
+        /*$participant = $participantRepository->find($id);*/
         $participant = $this->getUser();
-        $participantId = $participant->getUserIdentifier();
 
-        $profil = $inscriptionRepository->findOneBy([
-            'username' => $participantId
+        $participant->getUserIdentifier();
+
+       $profil = $participantRepository->findOneBy([
+            'username' => $participant
         ]);
 
-        if($enlistForm->isSubmitted() && $enlistForm->isValid()) {
+        $sortie = $sortieRep->find($id);
 
-            $inscription->setDateInscription(new \DateTime());
-            $inscriptionRepository->add($profil, true);
-        }
+        $inscription->setParticipant($profil);
+        $inscription->setSortie($sortie);
 
         if(!$profil){
             throw $this->createNotFoundException("Erreur : Profil introuvable !");
         }
 
-        return $this->render('sortie/enlist.html.twig');
+
+
+            $inscription->setDateInscription(new \DateTime());
+            $inscriptionRepository->add($inscription, true);
+
+
+
+
+        return $this->render('sortie/enlist.html.twig', [
+            "user" => $participant
+        ]);
     }
 
 }

@@ -15,6 +15,8 @@
     <div class="display_sorties">
         {% for sortie in sorties %}
 
+            <a href="{{ path('sortie_enlist', {'id': sortie.id}) }}">inscription</a>
+
             <a href={{ path('sortie_details',{'id': sortie.id}) }}>
                 <div class="bloc_sortie">
                     <div class="img_sortie_bloc">
