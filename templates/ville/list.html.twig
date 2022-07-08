@@ -14,7 +14,7 @@
         <div class="nom-ville-pannel">
             <ul>
             {% for ville in villes %}
-                <li>{{ ville.nom() }}</li>
+                <li id="{{ ville.id }}">{{ ville.nom() }}</li>
             {% endfor %}
 
             </ul>
@@ -22,14 +22,14 @@
         <div class="codepostal-ville-pannel">
             <ul>
                 {% for ville in villes %}
-                    <li>{{ ville.codePostal }}</li>
+                    <li id="{{ ville.id }}">{{ ville.codePostal }}</li>
                 {% endfor %}
             </ul>
         </div>
         <div class="actions-ville-pannel">
             <ul>
                 {% for ville in villes %}
-                    <li><a href="">Modifier</a> - <a href="{{ path('ville_delete', {'id':ville.id()}) }}">Supprimer</a> </li>
+                    <li><button onclick="textToInput({{ ville.id }})">Modifier</button> - <a href="{{ path('ville_delete', {'id':ville.id()}) }}">Supprimer</a> </li>
                 {% endfor %}
             </ul>
         </div>

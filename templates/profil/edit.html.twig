@@ -3,20 +3,48 @@
 
 {% endblock %}
 
+
+
 {% block body %}
-    <h1>Edit Profil</h1>
+    <div class="titre"><h1>Edit mon profil</h1></div>
 
-    {{ form_start(profilForm) }}
-    {{ form_row(profilForm.username, {label: "Pseudo"}) }}
-    {{ form_row(profilForm.nom) }}
-    {{ form_row(profilForm.prenom) }}
-    {{ form_row(profilForm.telephone) }}
-    {{ form_row(profilForm.email) }}
-    {{ form_row(profilForm.password, {value: ''}, {label: 'Mot de passe'}) }}
-    {{ form_rest(profilForm) }}
+    <div id="full-size">
+        <div class="formulaire">
 
-    <button>Edit profil</button>
-    {{ form_end(profilForm) }}
+            {{ form_start(profilForm) }}
+            {{ form_row(profilForm.username) }}
+            <div class="div_form">
+                <div class="div_form">
+                    {{ form_row(profilForm.nom) }}
+                    {{ form_row(profilForm.prenom) }}
+                    {{ form_row(profilForm.site) }}
+                </div>
+                <div class="div_form">
+                    {{ form_row(profilForm.telephone) }}
+                    {{ form_row(profilForm.email) }}
+                </div>
+                <div class="div_form">
+                    {{ form_row(profilForm.password) }}
+                </div>
+
+
+            <button class="btn-login"> Valider la modification</button>
+            {{ form_end(profilForm) }}
+
+        </div>
+    </div>
+
 {% endblock %}
+
+{% block extrastyles %}
+
+    <script type="text/javascript">
+        var chemin = "{{ app.request.getBaseURL() }}";
+        ChangeIt();
+    </script>
+{% endblock %}
+
+
+
 
 
