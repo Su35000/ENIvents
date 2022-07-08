@@ -9,8 +9,9 @@ use App\Entity\Sortie;
 use App\Form\SearchSortieType;
 use App\Form\SortieType;
 use App\Repository\InscriptionRepository;
-use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Repository\ParticipantRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,8 +42,8 @@ class SortieController extends AbstractController
     public function new(Request $request, SortieRepository $sortieRep): Response
     {
         $sortie = new Sortie();
-        $sortie->setDateHeureDebut(new \DateTime());
-        $sortie->setDateCloture(new \DateTime());
+        $sortie->setDateHeureDebut(new DateTime());
+        $sortie->setDateCloture(new DateTime());
 
         /**
          *
@@ -51,10 +52,6 @@ class SortieController extends AbstractController
         $user = $this->getUser();
 
 
-        /**
-         *
-         * @var Etat $etat
-         */
         $etat = new Etat();
         $etat->setLibelle('cree');
 
@@ -121,34 +118,54 @@ class SortieController extends AbstractController
                 'id' => $sortie->getId()
             ]);
         }
-        return $this->render('sortie/list.html.twig',[
+        return $this->render('sortie/edit.html.twig',[
             'sortieForm' => $sortieForm->createView()
         ]);
     }
 
     #[Route('/enlist/{id}', name: 'enlist')]
-    public function enlist(int $id, Request $request, /*SortieRepository $sortieRep,  ParticipantRepository $participantRepository*/ InscriptionRepository $inscriptionRepository): Response
+    public function enlist(int $id, Request $request, SortieRepository $sortieRep,ParticipantRepository $participantRepository, InscriptionRepository $inscriptionRepository): Response
     {
         $inscription = new Inscription();
 
+        /*$participant = $participantRepository->find($id);*/
+        /*$participant = $this->getUser();*/
+        /**
+         *
+         * @var Participant $user
+         */
         $participant = $this->getUser();
-        $participantId = $participant->getUserIdentifier();
 
-        $profil = $inscriptionRepository->findOneBy([
-            'username' => $participantId
-        ]);
+        dump($participant);
 
-        if($enlistForm->isSubmitted() && $enlistForm->isValid()) {
+    /*    $participant->getUserIdentifier();
 
-            $inscription->setDateInscription(new \DateTime());
-            $inscriptionRepository->add($profil, true);
-        }
+       $profil = $participantRepository->findOneBy([
+            'username' => $participant
+        ]);*/
 
-        if(!$profil){
+        $sortie = $sortieRep->find($id);
+
+        $inscription->setParticipant($participant);
+        $inscription->setSortie($sortie);
+
+        /*dump($profil);*/
+
+/*        if(!$profil){
             throw $this->createNotFoundException("Erreur : Profil introuvable !");
-        }
+        }*/
 
-        return $this->render('sortie/enlist.html.twig');
+
+
+            $inscription->setDateInscription(new DateTime());
+            $inscriptionRepository->add($inscription, true);
+
+
+
+
+        return $this->render('sortie/enlist.html.twig', [
+            "user" => $participant
+        ]);
     }
 
 }
