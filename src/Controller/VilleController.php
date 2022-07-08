@@ -15,13 +15,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class VilleController extends AbstractController
 {
     #[Route('/list', name: 'list')]
-    public function list(VilleRepository $villeRepository): Response
+    public function list(VilleRepository $villeRepository, Request $request): Response
     {
-
         $villes = $villeRepository->findAll();
+
+        $ville = new Ville();
+
+        $villeForm = $this->createForm(VilleType::class, $ville);
+        $villeForm->handleRequest($request);
+
+        if($villeForm->isSubmitted() && $villeForm->isValid()){
+
+            $villeRepository->add($ville, true);
+
+            $this->addFlash("success", "Ville modifié !");
+            return $this->redirectToRoute("ville_list");
+        }
 
         return $this->render('ville/list.html.twig', [
             'villes' => $villes,
+            'villeForm' => $villeForm->createView(),
         ]);
     }
 
@@ -100,8 +113,7 @@ class VilleController extends AbstractController
         dump($codePostal);
 
 
-        $ville->setNom($nom);
-        $ville->setCodePostal($codePostal);
+
 
 
         $villeForm->handleRequest($request);
