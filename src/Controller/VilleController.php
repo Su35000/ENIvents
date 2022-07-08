@@ -83,12 +83,19 @@ class VilleController extends AbstractController
          * @var String $nom
          * @var String $codePostal
          */
-        $nom = $villeForm->get("nom")->getData();
-        $codePostal = $villeForm->get("codePostal")->getData();
 
-        $nom = 'aze';
-        $codePostal = 'aazeze';
+        /*$nom = $villeForm->get("nom")->getData();
+        $codePostal = $villeForm->get("codePostal")->getData();*/
 
+        $nom = $request->request->get('nom');
+        $codePostal = $request->request->get('codePostal');
+
+        $request->query->get('nom');
+        $request->query->get('codePostal');
+
+
+
+        dump($request);
         dump($nom);
         dump($codePostal);
 

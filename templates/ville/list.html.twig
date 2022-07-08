@@ -9,13 +9,13 @@
     Le nom contient :
     <input type="search" >
     <button>Rechercher</button>
+    <form action="{{ path('ville_add') }}" method="POST">
     <div class="ville-panel">
         <div class="nom-ville-pannel">
             <ul>
                 {% for ville in villes %}
                     <li id="{{ ville.id }}">{{ ville.nom() }}</li>
                 {% endfor %}
-                <form action="{{ path('ville_add') }}" method="POST">
 
                 <input type="text" id="nom" name="nom">
 
@@ -35,7 +35,7 @@
                 {% for ville in villes %}
                     <li><a href="{{ path('ville_edit', {'id':ville.id()}) }}">Modifier</a> - <a href="{{ path('ville_delete', {'id':ville.id()}) }}">Supprimer</a> </li>
                 {% endfor %}
-                    <li><button type="submit" href="{{ path('ville_add') }}" id="submit" name="submit"> Ajouter </button></li>
+                    <li><button type="submit"  id="submit" name="submit"> Ajouter </button></li>
     </form>
             </ul>
         </div>
