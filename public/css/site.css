@@ -1,0 +1,18 @@
+.site-panel {
+    border: black solid;
+    margin: 7% 50% 0 208px;
+    width: 55%;
+    height: 50%;
+    overflow: scroll;
+    display: flex;
+}
+
+.nom-site-pannel{
+}
+.codepostal-site-pannel{
+
+}
+.action-site-pannel{
+
+
+}

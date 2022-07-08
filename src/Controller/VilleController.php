@@ -107,15 +107,6 @@ class VilleController extends AbstractController
         $request->query->get('codePostal');
 
 
-
-        dump($request);
-        dump($nom);
-        dump($codePostal);
-
-
-
-
-
         $villeForm->handleRequest($request);
 
         $villes = $villeRepository->findAll();
