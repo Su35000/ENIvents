@@ -9,3 +9,8 @@ function ChangeIt()
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
 }
+
+function textToInput(id){
+    console.log(id);
+    document.getElementById(id).innerHTML = "aze";
+}

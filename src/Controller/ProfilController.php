@@ -25,9 +25,6 @@ class ProfilController extends AbstractController
         $profil = $participantRepository->findOneBy([
             'username' => $participantId
         ]);
-        dump($profil);
-        dump($participantRepository);
-        dump($participantId);
 
         //Cas d'erreur
         if(!$profil){
