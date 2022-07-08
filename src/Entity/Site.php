@@ -19,6 +19,7 @@ class Site
     private $nom;
 
     #[ORM\OneToMany(mappedBy: 'site', targetEntity: Participant::class)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "cascade")]
     private $participant;
 
     public function __construct()
