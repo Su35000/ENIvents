@@ -79,7 +79,7 @@ class ParticipantController extends AbstractController
     public function detailsById(int $id,UserPasswordHasherInterface $userPasswordHasher, ParticipantRepository $participantRepository, Request $request): Response
     {
 
-        $participant =  $this->getUser();
+        $participant = $participantRepository->find($id);
 
         $participantId = $participant->getUserIdentifier();
         //Récupération des infos du profil
@@ -93,7 +93,7 @@ class ParticipantController extends AbstractController
         }
 
 
-        return $this->render('profil/details.html.twig', [
+        return $this->render('profil/details-organisateur.html.twig', [
             "user" => $participant,
         ]);
     }
