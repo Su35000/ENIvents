@@ -11,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/ville', name: 'ville_')]
 class VilleController extends AbstractController
 {
-    #[Route('/edit', name: 'edit')]
-    public function edit(VilleRepository $villeRepository): Response
+    #[Route('/list', name: 'list')]
+    public function list(VilleRepository $villeRepository): Response
     {
 
         $villes = $villeRepository->findAll();
 
-        return $this->render('ville/edit.html.twig', [
+        return $this->render('ville/list.html.twig', [
             'villes' => $villes,
         ]);
     }

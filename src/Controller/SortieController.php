@@ -107,7 +107,7 @@ class SortieController extends AbstractController
                 'id' => $sortie->getId()
             ]);
         }
-        return $this->render('sortie/edit.html.twig',[
+        return $this->render('sortie/list.html.twig',[
             'sortieForm' => $sortieForm->createView()
         ]);
     }
