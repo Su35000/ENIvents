@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
+use App\Entity\Inscription;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SearchSortieType;
 use App\Form\SortieType;
+use App\Repository\InscriptionRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -125,14 +127,22 @@ class SortieController extends AbstractController
     }
 
     #[Route('/enlist/{id}', name: 'enlist')]
-    public function enlist(int $id, SortieRepository $sortieRep, Request $request, ParticipantRepository $participantRepository): Response
+    public function enlist(int $id, Request $request, /*SortieRepository $sortieRep,  ParticipantRepository $participantRepository*/ InscriptionRepository $inscriptionRepository): Response
     {
+        $inscription = new Inscription();
+
         $participant = $this->getUser();
         $participantId = $participant->getUserIdentifier();
 
-        $profil = $participantRepository->findOneBy([
+        $profil = $inscriptionRepository->findOneBy([
             'username' => $participantId
         ]);
+
+        if($enlistForm->isSubmitted() && $enlistForm->isValid()) {
+
+            $inscription->setDateInscription(new \DateTime());
+            $inscriptionRepository->add($profil, true);
+        }
 
         if(!$profil){
             throw $this->createNotFoundException("Erreur : Profil introuvable !");
