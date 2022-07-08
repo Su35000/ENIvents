@@ -1,4 +1,4 @@
-.ville-panel {
+.site-panel {
     border: black solid;
     margin: 7% 50% 0 208px;
     width: 55%;
@@ -7,12 +7,12 @@
     display: flex;
 }
 
-.nom-ville-pannel{
+.nom-site-pannel{
 }
-.codepostal-ville-pannel{
+.codepostal-site-pannel{
 
 }
-.action-ville-pannel{
+.action-site-pannel{
 
 
 }

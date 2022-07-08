@@ -15,13 +15,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class VilleController extends AbstractController
 {
     #[Route('/list', name: 'list')]
-    public function list(VilleRepository $villeRepository): Response
+    public function list(VilleRepository $villeRepository, Request $request): Response
     {
-
         $villes = $villeRepository->findAll();
+
+        $ville = new Ville();
+
+        $villeForm = $this->createForm(VilleType::class, $ville);
+        $villeForm->handleRequest($request);
+
+        if($villeForm->isSubmitted() && $villeForm->isValid()){
+
+            $villeRepository->add($ville, true);
+
+            $this->addFlash("success", "Ville modifié !");
+            return $this->redirectToRoute("ville_list");
+        }
 
         return $this->render('ville/list.html.twig', [
             'villes' => $villes,
+            'villeForm' => $villeForm->createView(),
         ]);
     }
 
@@ -83,18 +96,15 @@ class VilleController extends AbstractController
          * @var String $nom
          * @var String $codePostal
          */
-        $nom = $villeForm->get("nom")->getData();
-        $codePostal = $villeForm->get("codePostal")->getData();
 
-        $nom = 'aze';
-        $codePostal = 'aazeze';
+        /*$nom = $villeForm->get("nom")->getData();
+        $codePostal = $villeForm->get("codePostal")->getData();*/
 
-        dump($nom);
-        dump($codePostal);
+        $nom = $request->request->get('nom');
+        $codePostal = $request->request->get('codePostal');
 
-
-        $ville->setNom($nom);
-        $ville->setCodePostal($codePostal);
+        $request->query->get('nom');
+        $request->query->get('codePostal');
 
 
         $villeForm->handleRequest($request);
