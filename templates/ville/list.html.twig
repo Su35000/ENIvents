@@ -3,7 +3,7 @@
 {% block title %}Hello VilleController!{% endblock %}
 
 {% block body %}
-<h1> Gérer les villes </h1>
+    <h1> Gérer les villes </h1>
     <br><br><br>
 
     Filtrer les villes
@@ -13,9 +13,9 @@
     <div class="ville-panel">
         <div class="nom-ville-pannel">
             <ul>
-            {% for ville in villes %}
-                <li id="{{ ville.id }}">{{ ville.nom() }}</li>
-            {% endfor %}
+                {% for ville in villes %}
+                    <li id="{{ ville.id }}">{{ ville.nom() }}</li>
+                {% endfor %}
 
             </ul>
         </div>
