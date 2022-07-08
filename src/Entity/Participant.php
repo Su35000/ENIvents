@@ -48,7 +48,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $inscriptions;
 
     #[ORM\ManyToOne(targetEntity: Site::class, inversedBy: 'participant')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "cascade")]
     private $site;
 
     #[ORM\OneToMany(mappedBy: 'organisateur', targetEntity: Sortie::class)]
