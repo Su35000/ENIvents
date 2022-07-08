@@ -10,6 +10,15 @@ function ChangeIt()
     document.body.style.backgroundSize = "cover";
 }
 
+function ChangeSortiePicture()
+{
+    var num = Math.ceil( Math.random() * totalCount );
+    document.getElementById('img_default').src = chemin+'/img/sorties/default/'+num+'.jpg';
+
+}
+
+
+
 function textToInput(id){
     var spans = document.getElementsByTagName("span"),
         index,

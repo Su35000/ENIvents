@@ -1,0 +1,106 @@
+.display_sorties{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+.bloc_sortie{
+    width: 300px;
+    height: 400px;
+    background-color: #FFFAF9;
+    margin: 10px 3px;
+    border-radius: 10px;
+}
+
+.img_sortie_bloc{
+    position: relative;
+    width: 300px;
+    height: 250px;
+}
+
+.img_sortie{
+
+    width: 300px;
+    height: 250px;
+    object-fit: fill;
+    border-radius: 10px;
+}
+
+.sortie_site{
+    background-color: #fe7651;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 15px;
+    border-radius: 5px;
+    font-family: Bebas-Regular, sans-serif;
+    font-weight: normal;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100px;
+    height: 25px;
+    z-index: 5;
+    text-align: center;
+    line-height: 25px;
+}
+
+
+.sortie_ville{
+    color: #FFFFFF;
+    font-size: 15px;
+    border-radius: 5px;
+    font-family: Bebas-Regular, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    width: 90px;
+    height: 25px;
+    z-index: 5;
+    text-align: right;
+    line-height: 25px;
+}
+
+.main_infos{
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nb_participant{
+    font-family: Bebas-Regular, sans-serif;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: #fe7651;
+    margin: 5px;
+}
+
+.infos_area{
+    text-align: right;
+    font-size: 14px;
+    font-family: Inter, sans-serif;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin: 5px;
+    color: black;
+}
+
+.main_overview{
+    font-family: Inter, sans-serif;
+    font-weight: 200;
+    font-size: 16px;
+    margin: 5px;
+    color: black;
+}
+
+
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: black;
+}
