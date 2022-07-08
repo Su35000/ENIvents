@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Ville;
 use App\Form\VilleType;
 use App\Repository\LieuRepository;
 use App\Repository\VilleRepository;
@@ -67,6 +68,51 @@ class VilleController extends AbstractController
 
         return $this->redirectToRoute('ville_list', [
                 'villes' => $villes,
+            ]);
+    }
+
+    #[Route('/add', name: 'add')]
+    public function add(VilleRepository $villeRepository, LieuRepository $lieuRepository, Request $request): Response
+    {
+
+        $ville = new Ville();
+
+        $villeForm = $this->createForm(VilleType::class, $ville);
+        /**
+         *
+         * @var String $nom
+         * @var String $codePostal
+         */
+        $nom = $villeForm->get("nom")->getData();
+        $codePostal = $villeForm->get("codePostal")->getData();
+
+        $nom = 'aze';
+        $codePostal = 'aazeze';
+
+        dump($nom);
+        dump($codePostal);
+
+
+        $ville->setNom($nom);
+        $ville->setCodePostal($codePostal);
+
+
+        $villeForm->handleRequest($request);
+
+        $villes = $villeRepository->findAll();
+
+        if($villeForm->isSubmitted() && $villeForm->isValid()){
+            $villeRepository->add($ville, true);
+
+            $this->addFlash("success", "Ville ajoutée");
+
+            return $this->render('ville/edit.html.twig', [
+                'villeForm' => $villeForm->createView(),
+            ]);
+        }
+
+        return $this->redirectToRoute('ville_add', [
+            'villes' => $villes,
             ]);
     }
 
