@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Sortie;
 use App\Entity\Site;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -17,7 +18,9 @@ class SearchSortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('site', ChoiceType::class, [
+            ->add('site', EntityType::class, [
+                'label' => 'Site',
+                'class' => Site::class,
                 'choice_label' => function(?Site $site) {
                 return $site ? strtoupper($site->getNom()) : '';
                 },

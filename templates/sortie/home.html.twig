@@ -3,6 +3,14 @@
 
 {% block body %}
     <h1>Sorties : Home page </h1>
+    {{ form_start(searchSortieForm) }}
+    {{ form_widget(searchSortieForm) }}
+    {{ form_end(searchSortieForm) }}
+
+    {% for sortie in sorties %}
+        {{ sortie.nom }} |
+    {% endfor %}
+
 {% endblock %}
 
 {% block title %}Home{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\SearchSortieType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,9 +18,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     #[Route('', name: 'home')]
-    public function home(): Response
+    public function home(Request $request, SortieRepository $sortieRepository): Response
     {
-        return $this->render('sortie/home.html.twig');
+        $searchSortieForm = $this->createForm(SearchSortieType::class);
+        $searchSortieForm->handleRequest($request);
+
+        $sorties = $sortieRepository->findAll();
+
+        return $this->render('sortie/home.html.twig', [
+            'searchSortieForm' => $searchSortieForm->createView(),
+            'sorties' => $sorties
+        ]);
     }
 
 

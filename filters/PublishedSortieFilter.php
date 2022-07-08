@@ -9,12 +9,12 @@ class PublishedSortieFilter extends SQLFilter {
 
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
     {
-        if($targetEntity->reflClass->getAttributes($targetEntity, $targetTableAlias)) {
-            if($targetEntity->getReflectionClass()->name != Sortie::class) {
-                return sprintf('%s.etat = Ouverte', $targetTableAlias);
-            }
+        if ($targetEntity->reflClass->getAttributes($targetEntity, $targetTableAlias)) {
+            if ($targetEntity->getReflectionClass()->name != Sortie::class) {
+                return 's.nom = Grosse Murge';
 
-            return '';
-        }
+
+            }
+        } return '';
     }
 }
