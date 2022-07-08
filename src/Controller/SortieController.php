@@ -11,6 +11,7 @@ use App\Form\SortieType;
 use App\Repository\InscriptionRepository;
 use App\Repository\SortieRepository;
 use App\Repository\ParticipantRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,8 +42,8 @@ class SortieController extends AbstractController
     public function new(Request $request, SortieRepository $sortieRep): Response
     {
         $sortie = new Sortie();
-        $sortie->setDateHeureDebut(new \DateTime());
-        $sortie->setDateCloture(new \DateTime());
+        $sortie->setDateHeureDebut(new DateTime());
+        $sortie->setDateCloture(new DateTime());
 
         /**
          *
@@ -51,10 +52,6 @@ class SortieController extends AbstractController
         $user = $this->getUser();
 
 
-        /**
-         *
-         * @var Etat $etat
-         */
         $etat = new Etat();
         $etat->setLibelle('cree');
 
@@ -121,7 +118,7 @@ class SortieController extends AbstractController
                 'id' => $sortie->getId()
             ]);
         }
-        return $this->render('sortie/list.html.twig',[
+        return $this->render('sortie/edit.html.twig',[
             'sortieForm' => $sortieForm->createView()
         ]);
     }
@@ -132,26 +129,35 @@ class SortieController extends AbstractController
         $inscription = new Inscription();
 
         /*$participant = $participantRepository->find($id);*/
+        /*$participant = $this->getUser();*/
+        /**
+         *
+         * @var Participant $user
+         */
         $participant = $this->getUser();
 
-        $participant->getUserIdentifier();
+        dump($participant);
+
+    /*    $participant->getUserIdentifier();
 
        $profil = $participantRepository->findOneBy([
             'username' => $participant
-        ]);
+        ]);*/
 
         $sortie = $sortieRep->find($id);
 
-        $inscription->setParticipant($profil);
+        $inscription->setParticipant($participant);
         $inscription->setSortie($sortie);
 
-        if(!$profil){
+        /*dump($profil);*/
+
+/*        if(!$profil){
             throw $this->createNotFoundException("Erreur : Profil introuvable !");
-        }
+        }*/
 
 
 
-            $inscription->setDateInscription(new \DateTime());
+            $inscription->setDateInscription(new DateTime());
             $inscriptionRepository->add($inscription, true);
 
 
