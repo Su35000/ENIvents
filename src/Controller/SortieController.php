@@ -7,6 +7,7 @@ use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SearchSortieType;
 use App\Form\SortieType;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -119,6 +120,23 @@ class SortieController extends AbstractController
         return $this->render('sortie/list.html.twig',[
             'sortieForm' => $sortieForm->createView()
         ]);
+    }
+
+    #[Route('/enlist/{id}', name: 'enlist')]
+    public function enlist(int $id, SortieRepository $sortieRep, Request $request, ParticipantRepository $participantRepository): Response
+    {
+        $participant = $this->getUser();
+        $participantId = $participant->getUserIdentifier();
+
+        $profil = $participantRepository->findOneBy([
+            'username' => $participantId
+        ]);
+
+        if(!$profil){
+            throw $this->createNotFoundException("Erreur : Profil introuvable !");
+        }
+
+        return $this->render('sortie/enlist.html.twig');
     }
 
 }
