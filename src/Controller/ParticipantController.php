@@ -73,4 +73,28 @@ class ParticipantController extends AbstractController
             "user" => $participant,
         ]);
     }
+
+
+    #[Route('/details/{id}', name: 'detailsById')]
+    public function detailsById(int $id,UserPasswordHasherInterface $userPasswordHasher, ParticipantRepository $participantRepository, Request $request): Response
+    {
+
+        $participant =  $this->getUser();
+
+        $participantId = $participant->getUserIdentifier();
+        //Récupération des infos du profil
+        $profil = $participantRepository->findOneBy([
+            'username' => $participantId
+        ]);
+
+        //Cas d'erreur
+        if(!$profil){
+            throw $this->createNotFoundException("Erreur : Profil introuvable !");
+        }
+
+
+        return $this->render('profil/details.html.twig', [
+            "user" => $participant,
+        ]);
+    }
 }
