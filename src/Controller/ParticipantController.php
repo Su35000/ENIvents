@@ -73,6 +73,4 @@ class ParticipantController extends AbstractController
             "user" => $participant,
         ]);
     }
-
-
 }
