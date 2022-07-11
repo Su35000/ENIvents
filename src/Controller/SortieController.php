@@ -118,54 +118,36 @@ class SortieController extends AbstractController
                 'id' => $sortie->getId()
             ]);
         }
-        return $this->render('sortie/edit.html.twig',[
+        return $this->render('sortie/edit.html.twig', [
             'sortieForm' => $sortieForm->createView()
         ]);
     }
 
     #[Route('/enlist/{id}', name: 'enlist')]
-    public function enlist(int $id, Request $request, SortieRepository $sortieRep,ParticipantRepository $participantRepository, InscriptionRepository $inscriptionRepository): Response
+    public function enlist(int $id, Request $request, SortieRepository $sortieRep, ParticipantRepository $participantRepository, InscriptionRepository $inscriptionRepository): Response
     {
         $inscription = new Inscription();
 
-        /*$participant = $participantRepository->find($id);*/
-        /*$participant = $this->getUser();*/
-        /**
-         *
-         * @var Participant $user
-         */
         $participant = $this->getUser();
 
         dump($participant);
 
-    /*    $participant->getUserIdentifier();
-
-       $profil = $participantRepository->findOneBy([
-            'username' => $participant
-        ]);*/
 
         $sortie = $sortieRep->find($id);
 
         $inscription->setParticipant($participant);
         $inscription->setSortie($sortie);
 
-        /*dump($profil);*/
-
-/*        if(!$profil){
+        if (!$participant) {
             throw $this->createNotFoundException("Erreur : Profil introuvable !");
-        }*/
+        }
+        $inscription->setDateInscription(new DateTime());
+        $inscriptionRepository->add($inscription, true);
 
-
-
-            $inscription->setDateInscription(new DateTime());
-            $inscriptionRepository->add($inscription, true);
-
-
-
-
-        return $this->render('sortie/enlist.html.twig', [
+        return $this->redirectToRoute('sortie_home', [
             "user" => $participant
         ]);
+
     }
 
 }
