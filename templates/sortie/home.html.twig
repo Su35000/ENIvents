@@ -15,7 +15,7 @@
     <div class="display_sorties">
         {% for sortie in sorties %}
 
-
+            <a href="{{ path('sortie_enlist', {'id': sortie.id}) }}">inscription</a>
 
             <a href={{ path('sortie_details',{'id': sortie.id}) }}>
                 <div class="bloc_sortie">
@@ -30,7 +30,6 @@
                         <div class="main_infos">
                             <div class="nb_participant"> / {{ sortie.nbInscritMax }} pers.</div>
                             <div class="infos_area">
-                                <a href="{{ path('sortie_enlist', {'id': sortie.id}) }}">inscription</a>
 {#                                <div class="sortie_lieu">{{ sortie.lieu }} </div>#}
                                 <div class="sortie_lieu">sortie.lieu </div>
                                 <div class="sortie_organisateur">{{ sortie.organisateur.prenom }} </div>
