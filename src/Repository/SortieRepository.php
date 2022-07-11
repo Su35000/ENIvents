@@ -43,19 +43,16 @@ class SortieRepository extends ServiceEntityRepository
 
     //   ###########  il faut réduire le nombre de queries sur la page d'accueil  ###########
 
-//    public function findAllSorties()
-//    {
-//        $qb = $this->createQueryBuilder('s');
-//        //liaison avec la table inscription
-//        $qb->leftJoin('s.inscriptions', 'i');
-//        $qb->leftJoin('i.participant', 'p');
-////        $qb->Where('i.participant IN (:participant)')
-////            ->setParameter('participant', $participant)
-////            ->orderBy('s.dateHeureDebut' ,'DESC');
-//        $qb->addSelect('s');
-//        $query = $qb->getQuery()->getResult();
-//        return $query;
-//    }
+    public function findAllSorties()
+    {
+        $qb = $this->createQueryBuilder('s');
+        //liaison avec la table particpant
+        $qb->leftJoin('s.inscriptions', 'i');
+        $qb->leftJoin('i.participant', 'participant');
+        $qb->leftJoin('s.organisateur', 'o');
+        $query = $qb->getQuery()->getResult();
+        return $query;
+    }
 
     public function findAllSortiesParticipeesPar(Participant $participant)
     {

@@ -29,8 +29,6 @@ class SortieController extends AbstractController
 
         $sorties = $sortieRepository->findAllSorties();
 
-       //dd($sorties);
-
         return $this->render('sortie/home.html.twig', [
             'searchSortieForm' => $searchSortieForm->createView(),
             'sorties' => $sorties
@@ -134,13 +132,18 @@ class SortieController extends AbstractController
 
         $participant = $this->getUser();
 
-        //dump($participant);
-
-
         $sortie = $sortieRep->find($id);
 
         if (in_array($participant, $participantRepository->findParticipantBySortie($sortie))){
             $this->addFlash('success', ' Vous êtes déjà inscrit à la sortie !');
+
+            return $this->redirectToRoute('sortie_home');
+        }
+
+        $today = new DateTime();
+
+        if ($today>$sortie->getDateCloture()){
+            $this->addFlash('success', "Date limite d'inscription dépassée, essayez une prochaine fois ... !");
 
             return $this->redirectToRoute('sortie_home');
         }
