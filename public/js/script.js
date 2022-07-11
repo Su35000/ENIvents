@@ -8,6 +8,9 @@ function ChangeIt()
     document.body.background = chemin+'/img/backgrounds/'+num+'.svg';
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
+    // document.body.style.backgroundColor = "black";
+    // document.body.style.backgroundOpacity = " -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));\n" +
+    //     "      mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));";
 }
 
 function ChangeSortiePicture()

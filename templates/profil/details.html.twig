@@ -7,50 +7,58 @@
     <div class="titre"><h1>Mon profil </h1></div>
 
     <div id="full-size">
-        <div class="list_mes_sorties">
+        <div class="etiquette">
+            <div class="flex_row">
 
-            <div>
-                <div> Pseudo :</div>
-                <div> Nom :</div>
-                <div> Prénom :</div>
-                <div> Telephone :</div>
-                <div> Email :</div>
+
+                <div class="margin ">
+                    <div> Pseudo :</div>
+                    <div> Nom :</div>
+                    <div> Prénom :</div>
+                    <div> Telephone :</div>
+                    <div> Email :</div>
+                </div>
+                <div style="text-align: left;">
+                    <div> {{ user.username }} </div>
+                    <div> {{ user.nom }} </div>
+                    <div> {{ user.prenom }} </div>
+                    <div> {{ user.telephone }} </div>
+                    <div> {{ user.email }} </div>
+                </div>
+                <a class="btn-login margin" href="{{ path('profil_edit', {'id':user.id()}) }}">Modifier mon profil</a>
             </div>
-            <div style="text-align: left;">
-                <div> {{ user.username }} </div>
-                <div> {{ user.nom }} </div>
-                <div> {{ user.prenom }} </div>
-                <div> {{ user.telephone }} </div>
-                <div> {{ user.email }} </div>
-            </div>
-            <a class="btn-login" href="{{ path('profil_edit', {'id':user.id()}) }}">Modifier mon profil</a>
+
             <span class="separator"> </span>
 
-            <div class="list_mes_sorties">
+            <div class="list_sorties">
 
                 <div>
-                    <div class="titre"> J'organise ...</div>
-                    <div class="list-participant">
+                    <div class="titre_noir"> J'organise ...</div>
+                    <div class="" >
                         {% for sortie in sortiesOrganisees %}
                             <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">
-                                <div>  {{ sortie.nom }} | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
+                                <div>  <strong>{{ sortie.nom }}</strong> | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
                                     à {{ sortie.dateHeureDebut|date("H:i") }} </div>
                                 <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
                             </a>
-                            <span> - </span>
+                            <button> <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">Voir </a></button>
+                            <button> <a>Annuler </a></button>
+                            <br> <span> - </span>
                         {% endfor %}
                     </div>
                 </div>
                 <div style="text-align: left;">
-                    <div class="titre"> Je participe ...</div>
-                    <div class="list-participant">
+                    <div class="titre_noir"> Je participe ...</div>
+                    <div>
                         {% for sortie in sortiesParticipees %}
                             <div>
-                                <div>  {{ sortie.nom }} | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
+                                <div>  <strong>{{ sortie.nom }}</strong> | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
                                     à {{ sortie.dateHeureDebut|date("H:i") }} </div>
                                 <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
                             </div>
-                            <span> - </span>
+                            <button> <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">Voir </a></button>
+                            <button> <a> Se désister </a> </button>
+                            <br><span> - </span>
                         {% endfor %}
                     </div>
                 </div>
