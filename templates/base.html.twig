@@ -17,7 +17,10 @@
     </head>
     <body>
         <header>
+            {% if app.user %}
+
             {% include 'head/nav.html.twig' %}
+            {% endif %}
         </header>
         <main>
         {% block body %}{% endblock %}

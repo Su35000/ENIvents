@@ -45,6 +45,10 @@ html, body {
     align-items: center;
 }
 
+main{
+    padding-top: 100px;
+}
+
 body {
     font-family: 'Nunito', "Roboto Light", "Roboto Thin", serif;
 }
@@ -138,6 +142,13 @@ label {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.separator{
+    display:block;
+    width:80%;
+    margin: 15px auto;
+    border-top: 3px solid #000;
 }
 
 @media screen and (min-width: 700px) {

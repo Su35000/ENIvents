@@ -1,20 +1,34 @@
 .logo{
-    width: 65px;
+    width: 240px;
+    z-index: 20;
 }
 
 nav ul {
+    background-color: white;
+    font-family: Bebas-Regular, sans-serif;
+    font-size: 20px;
+    height: 10%;
+    width: 100%;
+    top: 25px;
+    position: absolute;
     display: flex;
+    align-items: center;
     list-style: none;
     justify-content: center;
 }
 
 .navbar{
-    font-size: 25px;
+    font-size: 35px;
     margin: 0;
 }
 
 li{
     padding: 15px;
+}
+
+li:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
 }
 
 ul{

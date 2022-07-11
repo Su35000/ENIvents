@@ -1,1 +1,62 @@
 {% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="titre"><h1>Détails de la sortie</h1></div>
+
+    <div id="full-size">
+        <div class="formulaire">
+
+            <h1>{{ sortie.nom }}</h1>
+
+
+            <div class="div_form">
+                <div class="div_form">
+                    {{ sortie.etat.libelle }}
+                    {{ sortie.lieu.ville.nom }}
+                </div>
+                <div class="div_form">
+                    {{ sortie.nbInscritMax }}
+
+                </div>
+            </div>
+            <div class="div_form">
+                {{ sortie.description }}
+
+            </div>
+
+            <span class="separator"> </span>
+
+
+            <div class="div_form">
+                <a href="{{ path('profil_detailsById',{'id': sortie.organisateur.id}) }}"> {{ sortie.organisateur.nom }} {{ sortie.organisateur.prenom }}</a>
+            </div>
+            <button class="btn-login"> Contacter l'organisateur </button>
+
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+
+            {% block extrastyles %}
+                <style>
+                    body{
+                        background-image: linear-gradient(top, rgba(255,0,0,0), #ee403d);
+                    }
+                </style>
+
+                <script type="text/javascript">
+                    var chemin = "{{ app.request.getBaseURL() }}";
+                    ChangeSortiePicture();
+                </script>
+                <script type="text/javascript">
+                    var chemin = "{{ app.request.getBaseURL() }}";
+                    ChangeIt();
+                </script>
+            {% endblock %}

@@ -29,7 +29,7 @@ class SortieController extends AbstractController
 
         $sorties = $sortieRepository->findAll();
 
-//        var_dump($sorties);
+       //dd($sorties);
 
         return $this->render('sortie/home.html.twig', [
             'searchSortieForm' => $searchSortieForm->createView(),
@@ -89,7 +89,9 @@ class SortieController extends AbstractController
             throw $this->createNotFoundException("O0Oo0PS ! La sortie n'existe pas !");
         }
 
-        return $this->render('sortie/details.html.twig');
+        return $this->render('sortie/details.html.twig', [
+            'sortie'=>$sortie
+        ]);
 
     }
 

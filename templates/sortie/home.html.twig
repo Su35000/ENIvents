@@ -1,48 +1,42 @@
 {% extends 'base.html.twig' %}
 
 
+
 {% block body %}
     <h1>Sorties : Home page </h1>
     {{ form_start(searchSortieForm) }}
     {{ form_widget(searchSortieForm) }}
     {{ form_end(searchSortieForm) }}
 
-    {% for sortie in sorties %}
-        {{ sortie.nom }} |
-    {% endfor %}
-
-
     <div class="display_sorties">
         {% for sortie in sorties %}
 
-            <a href="{{ path('sortie_enlist', {'id': sortie.id}) }}">inscription</a>
-
-            <a href={{ path('sortie_details',{'id': sortie.id}) }}>
+            <a class="bloc" href={{ path('sortie_details',{'id': sortie.id}) }}>
                 <div class="bloc_sortie">
                     <div class="img_sortie_bloc">
-                        <img class="img_sortie" id="img_default"  src="{{ asset('img/sorties/default.jpg') }}">
-{#                        <div class="sortie_site">{{ sortie.site.nom }}</div>#}
-{#                        <div class="sortie_ville">{{ sortie.ville.nom }}</div> #}
-                        <div class="sortie_site">sortie.site.nom </div>
-                        <div class="sortie_ville"> sortie.ville.nom </div>
+                        <img class="img_sortie" id="img_default" src="{{ asset('img/sorties/default.jpg') }}">
+                        <div class="sortie_etat">{{ sortie.etat.libelle }} </div>
+                        <div class="sortie_ville"> {{ sortie.lieu.ville.nom }} </div>
                     </div>
-                    <div>
+                    <div class="infos">
                         <div class="main_infos">
-                            <div class="nb_participant"> / {{ sortie.nbInscritMax }} pers.</div>
+                            <div class="nb_participant"> {{ sortie.nbInscritMax|length }}/ <br>{{ sortie.nbInscritMax }}
+                                pers.
+                            </div>
                             <div class="infos_area">
-{#                                <div class="sortie_lieu">{{ sortie.lieu }} </div>#}
-                                <div class="sortie_lieu">sortie.lieu </div>
-                                <div class="sortie_organisateur">{{ sortie.organisateur.prenom }} </div>
+
+                                <div class="sortie_organisateur">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom }} </div>
                             </div>
                         </div>
-                        <div class="main_overview">{{ sortie.description[:100] ~ '...' }}</div>
-                    </div>
+                        <div class="infos_bottom">
 
+                                <div class="main_overview">{{ sortie.description[:100]|nl2br ~ '...' }}</div>
+
+                            <div><a class="btn_go">GO !</a></div>
+                        </div>
+                    </div>
                 </div>
             </a>
-
-
-
 
         {% else %}
             <p>no records found</p>
@@ -58,9 +52,19 @@
 
 
        {% block extrastyles %}
+           <style>
+               body{
+                   background-image: linear-gradient(top, rgba(255,0,0,0), #ee403d);
+               }
+           </style>
 
            <script type="text/javascript">
                var chemin = "{{ app.request.getBaseURL() }}";
                ChangeSortiePicture();
            </script>
+           <script type="text/javascript">
+               var chemin = "{{ app.request.getBaseURL() }}";
+               ChangeIt();
+           </script>
        {% endblock %}
+

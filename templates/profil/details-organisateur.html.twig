@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="titre"><h1>Profil</h1></div>
+
+    <div id="full-size">
+        <div class="formulaire">
+
+            <label> Pseudo </label>
+            <div> {{ user.username }} </div>
+            <div class="div_form">
+                <div class="div_form">
+                    <div>
+{#                        <label> Nom </label>#}
+                        <div> {{ user.nom }} </div>
+                    </div>
+                    <div>
+{#                        <label> Prenom </label>#}
+                        <div> {{ user.prenom }} </div>
+                    </div>
+                </div>
+                <div class="div_form">
+                    <div>
+                        <label> Telephone </label>
+                        <div> {{ user.telephone }} </div>
+                    </div>
+                    <div>
+                        <label> Email </label>
+                        <div> {{ user.email }} </div>
+                    </div>
+                </div>
+
+{% endblock %}
+
+
+{% block extrastyles %}
+
+    <script type="text/javascript">
+        var chemin = "{{ app.request.getBaseURL() }}";
+        ChangeIt();
+    </script>
+{% endblock %}
