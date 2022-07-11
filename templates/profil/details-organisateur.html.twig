@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="titre"><h1>Mon profil ✅</h1></div>
+    <div class="titre"><h1>Profil</h1></div>
 
     <div id="full-size">
         <div class="formulaire">
@@ -32,13 +32,6 @@
                         <div> {{ user.email }} </div>
                     </div>
                 </div>
-
-<a class="btn-login" href="{{ path('profil_edit', {'id':user.id()}) }}">Modifier mon profil</a>
-
-{#        <button class="btn-login"> Modifier mon profil</button>#}
-
-
-
 
 {% endblock %}
 
