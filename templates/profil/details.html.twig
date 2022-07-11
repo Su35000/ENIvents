@@ -4,38 +4,66 @@
 {% endblock %}
 
 {% block body %}
-    <div class="titre"><h1>Mon profil ✅</h1></div>
+    <div class="titre"><h1>Mon profil </h1></div>
 
     <div id="full-size">
-        <div class="formulaire">
+        <div class="list_mes_sorties">
 
-            <label> Pseudo </label>
-            <div> {{ user.username }} </div>
-            <div class="div_form">
-                <div class="div_form">
-                    <div>
-{#                        <label> Nom </label>#}
-                        <div> {{ user.nom }} </div>
-                    </div>
-                    <div>
-{#                        <label> Prenom </label>#}
-                        <div> {{ user.prenom }} </div>
+            <div>
+                <div> Pseudo :</div>
+                <div> Nom :</div>
+                <div> Prénom :</div>
+                <div> Telephone :</div>
+                <div> Email :</div>
+            </div>
+            <div style="text-align: left;">
+                <div> {{ user.username }} </div>
+                <div> {{ user.nom }} </div>
+                <div> {{ user.prenom }} </div>
+                <div> {{ user.telephone }} </div>
+                <div> {{ user.email }} </div>
+            </div>
+            <a class="btn-login" href="{{ path('profil_edit', {'id':user.id()}) }}">Modifier mon profil</a>
+            <span class="separator"> </span>
+
+            <div class="list_mes_sorties">
+
+                <div>
+                    <div class="titre"> J'organise ...</div>
+                    <div class="list-participant">
+                        {% for sortie in sortiesOrganisees %}
+                            <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">
+                                <div>  {{ sortie.nom }} | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
+                                    à {{ sortie.dateHeureDebut|date("H:i") }} </div>
+                                <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
+                            </a>
+                            <span> - </span>
+                        {% endfor %}
                     </div>
                 </div>
-                <div class="div_form">
-                    <div>
-                        <label> Telephone </label>
-                        <div> {{ user.telephone }} </div>
-                    </div>
-                    <div>
-                        <label> Email </label>
-                        <div> {{ user.email }} </div>
+                <div style="text-align: left;">
+                    <div class="titre"> Je participe ...</div>
+                    <div class="list-participant">
+                        {% for sortie in sortiesParticipees %}
+                            <div>
+                                <div>  {{ sortie.nom }} | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
+                                    à {{ sortie.dateHeureDebut|date("H:i") }} </div>
+                                <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
+                            </div>
+                            <span> - </span>
+                        {% endfor %}
                     </div>
                 </div>
+            </div>
 
-<a class="btn-login" href="{{ path('profil_edit', {'id':user.id()}) }}">Modifier mon profil</a>
 
-{#        <button class="btn-login"> Modifier mon profil</button>#}
+        </div>
+
+
+    </div>
+
+
+    {#        <button class="btn-login"> Modifier mon profil</button> #}
 
 
 

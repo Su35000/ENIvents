@@ -8,13 +8,41 @@ element {
     --rouge-bg-color: #ee403d;
 }
 
+.flash{
+    text-align: center;
+    font-family: Bebas-Regular, sans-serif;
+    font-size: 20px;
+    height: 40px;
+    padding-top: 5px;
+    color: white;
+    background-color: #ee403d;
+    margin-top: 30px;
+    margin-bottom: auto;
+
+}
+
 * {
+    /*background: black;*/
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-
+.section_recherche{
+    background-color: white;
+    font-family: "Roboto Light", sans-serif;
+    font-size: 16px;
+    margin-top: 50px;
+    height: 18%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    justify-content: space-around;
+}
 
 
 html, body {
@@ -150,6 +178,17 @@ label {
     margin: 15px auto;
     border-top: 3px solid #000;
 }
+
+
+.list_mes_sorties{
+    text-align: right;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 @media screen and (min-width: 700px) {
     .serie-details {

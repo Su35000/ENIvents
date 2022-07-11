@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ProfilType;
 use App\Repository\ParticipantRepository;
+use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,7 +53,7 @@ class ParticipantController extends AbstractController
     }
 
     #[Route('/details', name: 'details')]
-    public function details(UserPasswordHasherInterface $userPasswordHasher, ParticipantRepository $participantRepository, Request $request): Response
+    public function details(UserPasswordHasherInterface $userPasswordHasher, SortieRepository $sortieRep, ParticipantRepository $participantRepository, Request $request): Response
     {
 
         $participant =  $this->getUser();
@@ -63,6 +64,11 @@ class ParticipantController extends AbstractController
             'username' => $participantId
         ]);
 
+
+
+        $sortiesParticipees = $sortieRep->findAllSortiesParticipeesPar($participant);
+        $sortiesOrganisees = $sortieRep->findAllSortiesOrganiseesPar($participant);
+
         //Cas d'erreur
         if(!$profil){
             throw $this->createNotFoundException("Erreur : Profil introuvable !");
@@ -71,6 +77,8 @@ class ParticipantController extends AbstractController
 
         return $this->render('profil/details.html.twig', [
             "user" => $participant,
+            "sortiesParticipees" => $sortiesParticipees,
+            "sortiesOrganisees" => $sortiesOrganisees
         ]);
     }
 

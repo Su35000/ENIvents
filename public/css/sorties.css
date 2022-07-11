@@ -62,19 +62,21 @@
     border-radius: 10px;
 }
 
-.sortie_etat{
+.sortie_nom{
     background-color: #ee403d;
     color: #e0e0e0;
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 20px;
     border-radius: 5px;
     font-family: Bebas-Regular, sans-serif;
     font-weight: normal;
     position: absolute;
     top: 10px;
     left: 10px;
-    width: 100px;
-    height: 25px;
+    margin-left: 10px;
+    padding-top: 5px;
+    width: 200px;
+    height: 35px;
     z-index: 5;
     text-align: center;
     line-height: 25px;
@@ -83,6 +85,9 @@
 
 .sortie_ville{
     color: #cbf801;
+    background-color: rgba(0, 0, 0, 0.6);;
+    margin-left: 5px;
+    padding: 5px;
     font-size: 15px;
     border-radius: 5px;
     font-family: Bebas-Regular, sans-serif;
@@ -90,9 +95,9 @@
     text-transform: uppercase;
     letter-spacing: 4px;
     position: absolute;
-    bottom: 10px;
-    right: 15px;
-    height: 25px;
+    top: 50px;
+    left: 15px;
+    height: 30px;
     z-index: 5;
     text-align: right;
     line-height: 25px;
@@ -110,6 +115,7 @@
     letter-spacing: 4px;
     color: #ee403d;
     margin: 5px;
+    padding-left: 15px;
 }
 
 .infos_area{
@@ -128,6 +134,7 @@
     width: 180px;
     font-size: 12px;
     margin: 10px;
+    padding-bottom: 15px;
     color: black;
 }
 
@@ -156,9 +163,10 @@ a {
 }
 
 .btn_go{
+    margin-top: 20px;
     width: 90px;
     height: 90px;
-    padding: 15px;
+    padding: 35px;
     border-radius: 100px;
     color: #DDDDDD;
 
@@ -174,6 +182,8 @@ a {
 .btn_go:hover {
     transition-duration: 0.1s;
     background-color: #ff0700;
+    width: 100px;
+    height: 100px;
 }
 
 
@@ -182,10 +192,10 @@ a {
     display: block;
     position: absolute;
     border-radius: 4em;
-    left: 0;
-    top:0;
-    width: 100%;
-    height: 100%;
+    /*left: 0;*/
+    /*top:0;*/
+    width: 90px;
+    height: 90px;
     opacity: 0;
     transition: all 0.5s;
     box-shadow: 0 0 10px 40px white;
@@ -195,15 +205,15 @@ a {
     box-shadow: 0 0 0 0 white;
     position: absolute;
     border-radius: 4em;
-    left: 0;
-    top:0;
+    /*left: 0;*/
+    /*top:0;*/
     opacity: 1;
     transition: 0s;
 }
 
-.btn_go:active {
-    top: 1px;
-}
+/*.btn_go:active {*/
+/*    top: 1px;*/
+/*}*/
 
 .list-participant{
     border: black solid;
@@ -213,8 +223,4 @@ a {
     flex-direction: row;
     justify-content: space-evenly;
     margin: 0 50% 0 0;
-}
-
-.nom-participant{
-
 }

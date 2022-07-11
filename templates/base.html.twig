@@ -23,6 +23,14 @@
             {% endif %}
         </header>
         <main>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
         {% block body %}{% endblock %}
         </main>
 

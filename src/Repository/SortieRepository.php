@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Sortie;
 use App\Entity\Participant;
+use App\Entity\Sortie;
 use App\Entity\Inscription;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -40,6 +40,39 @@ class SortieRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAllSortiesParticipeesPar(Participant $participant)
+    {
+
+        //je récupère toutes mes sorties
+        $qb = $this->createQueryBuilder('s');
+        //liaison avec la table inscription
+        $qb->leftJoin('s.inscriptions', 'i');
+        $qb->leftJoin('i.participant', 'p');
+        $qb->Where('i.participant IN (:participant)')
+            ->setParameter('participant', $participant)
+            ->orderBy('s.dateHeureDebut' ,'DESC');
+
+        $query = $qb->getQuery()->getResult();
+        return $query;
+    }
+
+    public function findAllSortiesOrganiseesPar(Participant $organisateur)
+    {
+
+        //je récupère toutes mes sorties
+        $qb = $this->createQueryBuilder('s');
+        //liaison avec la table inscription
+        $qb->leftJoin('s.inscriptions', 'i');
+        $qb->leftJoin('i.participant', 'p');
+        $qb->Where('s.organisateur IN (:participant)')
+            ->setParameter('participant', $organisateur)
+            ->orderBy('s.dateHeureDebut' ,'DESC');
+
+        $query = $qb->getQuery()->getResult();
+        return $query;
+    }
+
 
 //    /**
 //     * @return Sortie[] Returns an array of Sortie objects

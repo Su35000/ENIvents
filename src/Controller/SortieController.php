@@ -134,10 +134,16 @@ class SortieController extends AbstractController
 
         $participant = $this->getUser();
 
-        dump($participant);
+        //dump($participant);
 
 
         $sortie = $sortieRep->find($id);
+
+        if (in_array($participant, $participantRepository->findParticipantBySortie($sortie))){
+            $this->addFlash('success', ' Vous êtes déjà inscrit à la sortie !');
+
+            return $this->redirectToRoute('sortie_home');
+        }
 
         $inscription->setParticipant($participant);
         $inscription->setSortie($sortie);
@@ -147,6 +153,9 @@ class SortieController extends AbstractController
         }
         $inscription->setDateInscription(new DateTime());
         $inscriptionRepository->add($inscription, true);
+
+        $this->addFlash('success', ' Vous êtes inscrit à la sortie !');
+
 
         return $this->redirectToRoute('sortie_home', [
             "user" => $participant
