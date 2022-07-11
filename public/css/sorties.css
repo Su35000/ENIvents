@@ -204,3 +204,17 @@ a {
 .btn_go:active {
     top: 1px;
 }
+
+.list-participant{
+    border: black solid;
+    height: 200px;
+    display: flex;
+    overflow: scroll;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0 50% 0 0;
+}
+
+.nom-participant{
+
+}

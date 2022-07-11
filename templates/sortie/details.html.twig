@@ -32,6 +32,22 @@
             <div class="div_form">
                 <a href="{{ path('profil_detailsById',{'id': sortie.organisateur.id}) }}"> {{ sortie.organisateur.nom }} {{ sortie.organisateur.prenom }}</a>
             </div>
+
+            <div class="list-participant">
+                <div class="pseudo-participant">
+                    <ul>
+                    {% for participant in participants %}
+                        <li> <a href="{{ path('profil_detailsById',{'id': participant.id }) }}"> {{ participant.username }} </a> </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="nom-participant">
+                    {% for participant in participants %}
+                        <li> <a href="{{ path('profil_detailsById',{'id': participant.id }) }}"> {{ participant.nom }} </a> </li>
+                    {% endfor %}
+                </div>
+            </div>
+
             <button class="btn-login"> Contacter l'organisateur </button>
 
 

@@ -79,17 +79,19 @@ class SortieController extends AbstractController
     }
 
     #[Route('/details/{id}', name: 'details')]
-    public function details(int $id, SortieRepository $sortieRep): Response
+    public function details(int $id, SortieRepository $sortieRep, ParticipantRepository $participantRepository): Response
     {
 
-        $sortie = $sortieRep->find($id);
 
+        $sortie = $sortieRep->find($id);
+        $participants = $participantRepository->findParticipantBySortie($sortie);
         //erreur 404
         if (!$sortie) {
             throw $this->createNotFoundException("O0Oo0PS ! La sortie n'existe pas !");
         }
 
         return $this->render('sortie/details.html.twig', [
+            'participants'=>$participants,
             'sortie'=>$sortie
         ]);
 

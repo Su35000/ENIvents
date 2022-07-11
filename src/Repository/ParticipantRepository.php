@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Participant;
+use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
@@ -68,7 +69,46 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
         )
             ->setParameter('query', $identifier)
             ->getOneOrNullResult();
+
     }
+        public function findParticipantBySortie(Sortie $sortie)
+    {
+        /*$entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT * FROM App\Entity\Sortie s
+            INNER JOIN App\Entity\Inscription i ON s.id = i.sortie_id
+            INNER JOIN App\Entity\Participant p ON i.participant_id = p.id
+            WHERE s.id = :query'
+        )
+            ->setParameter('query', $id);
+            return $query;*/
+
+        //je récupère toutes mes sorties
+//        $qb = $this->createQueryBuilder('s');
+//        //liaison avec la table inscription
+//        $qb->leftJoin('s.inscriptions', 'i');
+//        $qb->leftJoin('i.participant', 'p');
+//        $qb->Where('i.participant IN (:participant)')
+//            ->setParameter('participant', $participant)
+//            ->orderBy('s.dateHeureDebut' ,'DESC');
+//        $query = $qb->getQuery()->getResult();
+//        return $query;
+        ///////////////////////
+        ///
+        $qb = $this->createQueryBuilder('p');
+
+
+        $qb->innerJoin('p.inscriptions', 'ins')->addSelect('ins');
+        $qb->innerJoin('ins.sortie', 's')->addSelect('s');
+        $qb->Where("ins.sortie IN (:sortie)");
+        $qb->setParameter('sortie', $sortie);
+
+        $query = $qb->getQuery()->getResult();
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 
 //    /**
 //     * @return Participant[] Returns an array of Participant objects
