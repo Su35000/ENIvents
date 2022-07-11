@@ -9,27 +9,28 @@
     <div class="section_recherche">
         <div class="main_infos">
 
-            <div>
+            <div class="margin">
                 {{ form_start(searchSortieForm) }}
                 {{ form_row(searchSortieForm.site) }}
                 {{ form_row(searchSortieForm.le_nom_de_la_sortie_contient) }}
             </div>
-            <div>
+            <div class="margin">
                 {{ form_row(searchSortieForm.Entre) }}
                 {{ form_row(searchSortieForm.et) }}</div>
 
-            <div>
+            <div class="margin">
                 {{ form_row(searchSortieForm.filtreOrga) }}
-                {{ form_row(searchSortieForm.filtreInscrit) }}</div>
-            <div>
+                {{ form_row(searchSortieForm.filtreInscrit) }}
                 {{ form_row(searchSortieForm.filtrePasInscrit) }}
-                {{ form_row(searchSortieForm.filtreSortiesPasse) }}
+                {{ form_row(searchSortieForm.filtreSortiesPasse) }}</div>
+
+
                 <div>
-                    <button> Rechercher</button>
+                    <button class="btn-login"> Rechercher</button>
                 </div>
 
                 {{ form_end(searchSortieForm) }}</div>
-        </div>
+
 
     </div>
 

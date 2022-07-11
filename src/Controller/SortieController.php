@@ -27,7 +27,7 @@ class SortieController extends AbstractController
         $searchSortieForm = $this->createForm(SearchSortieType::class);
         $searchSortieForm->handleRequest($request);
 
-        $sorties = $sortieRepository->findAll();
+        $sorties = $sortieRepository->findAllSorties();
 
        //dd($sorties);
 
