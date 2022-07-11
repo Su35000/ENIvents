@@ -48,7 +48,12 @@
                 </div>
             </div>
 
-            <button class="btn-login"> Contacter l'organisateur </button>
+
+            {% if app.user.id == sortie.organisateur.id%}
+                <a href={{ path('profil_details') }}><button class="btn-login"> Supprimer la sortie </button></a>
+            {% else %}
+                <button class="btn-login"> Contacter l'organisateur </button>
+            {% endif %}
 
 
         </div>

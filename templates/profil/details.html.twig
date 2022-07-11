@@ -42,7 +42,7 @@
                                 <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
                             </a>
                             <button> <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">Voir </a></button>
-                            <button> <a>Annuler </a></button>
+                            <button> <a href="{{ path('sortie_annulation', {'id':sortie.id()}) }}">Annuler </a></button>
                             <br> <span> - </span>
                         {% endfor %}
                     </div>

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(sortieForm) }}
+
+    {{ form_row(sortieForm.motif) }}
+    <button> Enregistrer </button>
+    {{ form_rest(sortieForm) }}
+    {{ form_end(sortieForm) }}
+{% endblock %}
+
+
+

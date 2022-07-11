@@ -16,6 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\Form\View;
 
 
 #[Route('/sortie', name: 'sortie_')]
@@ -165,5 +167,36 @@ class SortieController extends AbstractController
         ]);
 
     }
+
+    #[Route('/annulation/{id}', name: 'annulation')]
+    public function annulation(int $id, Request $request, SortieRepository $sortieRep): Response
+    {
+        $sortie = $sortieRep->find($id);
+
+
+        //erreur 404
+        if (!$sortie) {
+            throw $this->createNotFoundException("O0Oo0PS ! La sortie n'existe pas !");
+        }
+
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+            $sortieRep->add($sortie, true);
+
+            $this->addFlash('success', "L'évènement a bien été annulé");
+
+            return $this->redirectToRoute('sortie_details', [
+                'id' => $sortie->getId()
+            ]);
+        }
+
+        return $this->render('sortie/annulation.html.twig', [
+            'sortieForm' => $sortieForm->createView()
+        ]);
+    }
+
 
 }

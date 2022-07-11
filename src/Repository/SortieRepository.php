@@ -94,11 +94,37 @@ class SortieRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT * FROM App\Entity\Sortie
                 WHERE date_cloture <= DATE_ADD(CURRENT_DATE, INTERVAL 1 MONTH) 
-                    AND id_etat = 57'
+                AND id_etat = 57'
         )->getOneOrNullResult();
 
         return $query->getResult();
+    }
 
+    public function annulationSortie(int $id): ?Sortie
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'UPDATE App\Entity\Sortie
+            SET etat_id = 40
+            WHERE id = :query'
+        )->setParameter('query', $id)
+         ->getOneOrNullResult();
+
+        return $query->getResult();
+    }
+
+    public function motifAnnulationSortie(int $id, string $text): ?Sortie
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'UPDATE App\Entity\Sortie
+            SET motif = ":text"
+            WHERE id = :query'
+        )->setParameter('query', $id)
+         ->setParameter('text', $text)
+         ->getOneOrNullResult();
+
+        return $query->getResult();
     }
 
 
