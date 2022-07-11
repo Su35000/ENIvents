@@ -73,6 +73,20 @@ class SortieRepository extends ServiceEntityRepository
         return $query;
     }
 
+    public function sortiePlusDunMois(): array
+    {
+        //SELECT * FROM sortie WHERE date_cloture <= DATE_ADD(CURRENT_DATE, INTERVAL 1 MONTH) AND id_etat = 57
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT * FROM App\Entity\Sortie
+                WHERE date_cloture <= DATE_ADD(CURRENT_DATE, INTERVAL 1 MONTH) 
+                    AND id_etat = 57'
+        )->getOneOrNullResult();
+
+        return $query->getResult();
+
+    }
+
 
 //    /**
 //     * @return Sortie[] Returns an array of Sortie objects
