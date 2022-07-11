@@ -228,6 +228,10 @@ label {
     margin: 40px;
 }
 
+textarea {
+    width: 400px;
+    height: 100px;
+}
 
 @media screen and (min-width: 700px) {
     .serie-details {
