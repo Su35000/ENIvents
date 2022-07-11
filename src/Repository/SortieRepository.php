@@ -49,7 +49,8 @@ class SortieRepository extends ServiceEntityRepository
         //liaison avec la table particpant
         $qb->leftJoin('s.inscriptions', 'i');
         $qb->leftJoin('i.participant', 'participant');
-        $qb->leftJoin('s.organisateur', 'o');
+        $qb->leftJoin('s.organisateur', 'o')
+        ->orderBy('s.dateHeureDebut' ,'DESC');
         $query = $qb->getQuery()->getResult();
         return $query;
     }

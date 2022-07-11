@@ -25,11 +25,11 @@
                 {{ form_row(searchSortieForm.filtreSortiesPasse) }}</div>
 
 
-                <div>
-                    <button class="btn-login"> Rechercher</button>
-                </div>
+            <div>
+                <button class="btn-login"> Rechercher</button>
+            </div>
 
-                {{ form_end(searchSortieForm) }}</div>
+            {{ form_end(searchSortieForm) }}</div>
 
 
     </div>
@@ -37,11 +37,14 @@
     <div class="display_sorties">
 
         {% for sortie in sorties %}
-            <a href="{{ path('sortie_details', {'id': sortie.id}) }}">
-                <div class="bloc_sortie">
+
+            {% if sortie.etat.libelle == 'archivee' %}
+
+
+                <div class="bloc_sortie_archive">
 
                     <div class="img_sortie_bloc">
-                        <img class="img_sortie" id="img_default" src="{{ asset('img/sorties/default.jpg') }}">
+                        <img class="img_sortie random_image" id="img_default" src="{{ asset('img/sorties/default.jpg') }}">
                         <div class="sortie_nom">{{ sortie.nom }} </div>
                         <div class="sortie_ville"> {{ sortie.lieu.ville.nom }} </div>
                     </div>
@@ -50,8 +53,8 @@
                             <div class="nb_participant"> {{ sortie.inscriptions|length }} pers. /
                                 <br>{{ sortie.nbInscritMax }} </div>
                             <div class="infos_area">
-                                <div><a class="btn_go" href={{ path('sortie_enlist',{'id': sortie.id}) }}>GO !</a></div>
-{#                                <div class="sortie_organisateur">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom }} </div>#}
+                                <div><a class="btn_fini"> FINI :( </a></div>
+                                {#                                <div class="sortie_organisateur">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom }} </div> #}
                             </div>
                         </div>
                         <div class="infos_bottom">
@@ -62,10 +65,42 @@
                         </div>
                     </div>
                 </div>
-            </a>
 
-        {% else %}
-            <p>no records found</p>
+
+            {% else %}
+                <a href="{{ path('sortie_details', {'id': sortie.id}) }}">
+                    <div class="bloc_sortie">
+
+                        <div class="img_sortie_bloc">
+                            <img class="img_sortie" id="img_default" src="{{ asset('img/sorties/default.jpg') }}">
+                            <div class="sortie_nom">{{ sortie.nom }} </div>
+                            <div class="sortie_ville"> {{ sortie.lieu.ville.nom }} </div>
+                        </div>
+                        <div class="infos">
+                            <div class="main_infos">
+                                <div class="nb_participant"> {{ sortie.inscriptions|length }} pers. /
+                                    <br>{{ sortie.nbInscritMax }} </div>
+                                <div class="infos_area">
+                                    <div><a class="btn_go" href={{ path('sortie_enlist',{'id': sortie.id}) }}>GO !</a>
+                                    </div>
+                                    {#                                <div class="sortie_organisateur">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom }} </div> #}
+                                </div>
+                            </div>
+                            <div class="infos_bottom">
+
+                                <div class="main_overview">{{ sortie.description[:100]|nl2br ~ '...' }}</div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+
+            {% endif %}
+
+
+
         {% endfor %}
     </div>
 

@@ -8,6 +8,15 @@
     margin-left: auto;
 }
 
+.bloc_sortie_archive{
+    width: 300px;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0.24);
+    margin: 10px 3px;
+    border-radius: 10px;
+    z-index: 2;
+}
+
 .bloc_sortie{
     width: 300px;
     height: 400px;
@@ -160,6 +169,23 @@
 a {
     background-color: transparent;
     text-decoration: none;
+}
+
+.btn_fini{
+    margin-top: 20px;
+    width: 70px;
+    height: 70px;
+    padding: 25px;
+    border-radius: 100px;
+    color: #DDDDDD;
+
+    font-family: Bebas-Regular, sans-serif;
+    font-size: 20px;
+    background-color: #000000;
+    border: #000000;
+    cursor:pointer;
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s; /* Safari */
 }
 
 .btn_go{

@@ -8,18 +8,19 @@ function ChangeIt()
     document.body.background = chemin+'/img/backgrounds/'+num+'.svg';
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
-    // document.body.style.backgroundColor = "black";
-    // document.body.style.backgroundOpacity = " -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));\n" +
-    //     "      mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));";
+    document.body.style.backgroundAttachment = "fixed";
 }
 
 function ChangeSortiePicture()
 {
-    var num = Math.ceil( Math.random() * totalCount );
-    document.getElementById('img_default').src = chemin+'/img/sorties/default/'+num+'.jpg';
+    let listeElement = document.getElementsByClassName("random_image")
+
+    Array.prototype.forEach.call(listeElement, function(el) {
+        var num = Math.ceil( Math.random() * totalCount );
+        el.src = chemin+'/img/sorties/default/'+num+'.jpg';
+    });
 
 }
-
 
 
 function textToInput(id){
