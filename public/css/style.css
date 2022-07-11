@@ -162,6 +162,14 @@ label {
     text-decoration: overline #cbf801;
 }
 
+.titre_noir{
+    font-family: Bebas-Regular, sans-serif;
+    color: black;
+    font-size: 30px;
+    display: inline;
+    text-align: center;
+}
+
 .div_form{
     display: flex;
     justify-content: space-around;
@@ -187,6 +195,37 @@ label {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.list_sorties{
+    text-align: right;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /*align-items: center;*/
+}
+
+
+
+.flex_row{
+    text-align: right;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.etiquette{
+    background-color: white;
+    border-radius: 50px;
+    width: 40%;
+    padding: 20px;
+}
+
+.margin{
+    margin: 40px;
 }
 
 
