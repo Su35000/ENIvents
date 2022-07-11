@@ -46,6 +46,7 @@ class SortieType extends AbstractType
 //                'choice_label' => function(?Ville $ville) {
 //                    return $ville ? strtoupper($ville->getNom()) : '';}
 //            ])
+            ->add('motif', TextareaType::class)
             ->add('lieu', EntityType::class,[
                 'label' => 'Lieu',
                 'class'=> Lieu::class,

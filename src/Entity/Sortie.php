@@ -33,6 +33,9 @@ class Sortie
     #[ORM\Column(type: 'text', length: 1000)]
     private $description;
 
+    #[ORM\Column(type: 'text', length: 1000, nullable: true)]
+    private $motif;
+
     #[ORM\OneToMany(mappedBy: 'sortie', targetEntity: Inscription::class)]
     private $inscriptions;
 
@@ -126,6 +129,18 @@ class Sortie
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getMotif(): ?string
+    {
+        return $this->motif;
+    }
+
+    public function setMotif(string $motif): self
+    {
+        $this->motif = $motif;
 
         return $this;
     }
