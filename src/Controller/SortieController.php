@@ -30,6 +30,14 @@ class SortieController extends AbstractController
     #[Route('', name: 'home')]
     public function home(Request $request, SortieRepository $sortieRepository): Response
     {
+
+        /**
+         *
+         * @var Participant $user
+         */
+        $user = $this->getUser();
+
+
         $searchSortieForm = $this->createForm(SearchSortieType::class);
         $searchSortieForm->handleRequest($request);
 
@@ -49,11 +57,22 @@ class SortieController extends AbstractController
 
         if ($searchSortieForm->isSubmitted() && $searchSortieForm->isValid()) {
 
+            $sortiesRecherchees = array();
+
             $sorties = $sortieRepository->findByFilters($valeurSaisie,$dateDebut,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse);
 
+            if ($searchSortieForm->get('filtreOrga')->getData() == true){
+               array_merge($sortiesRecherchees,$sortieRepository->findAllSortiesOrganiseesPar($user));
+            }
+
+            if ($searchSortieForm->get('filtreInscrit')->getData() == true){
+                array_merge($sortiesRecherchees,$sortieRepository->findAllSortiesParticipeesPar($user));
+            }
+
+            dd($sortiesRecherchees);
             return $this->render('sortie/home.html.twig', [
                 'searchSortieForm' => $searchSortieForm->createView(),
-                'sorties' => $sorties
+                'sorties' => $sortiesRecherchees
             ]);
         }
 
@@ -98,7 +117,7 @@ class SortieController extends AbstractController
 
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, SortieRepository $sortieRep): Response
+    public function new(Request $request, SortieRepository $sortieRep, EtatRepository $etatRep): Response
     {
         $sortie = new Sortie();
         $sortie->setDateHeureDebut(new DateTime());
@@ -111,7 +130,7 @@ class SortieController extends AbstractController
         $user = $this->getUser();
 
 
-        $etat = new Etat();
+        $etat = $etatRep->find(2);
         $etat->setLibelle('cree');
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
