@@ -33,8 +33,30 @@ class SortieController extends AbstractController
         $searchSortieForm = $this->createForm(SearchSortieType::class);
         $searchSortieForm->handleRequest($request);
 
+        $valeurSaisie = $searchSortieForm->get('le_nom_de_la_sortie_contient')->getData();
+        $dateDebut = $searchSortieForm->get('entre')->getData();
+        var_dump($dateDebut);
+        $dateFin = $searchSortieForm->get('et')->getData();
+        var_dump($dateFin);
+        $filtreOrga = $searchSortieForm->get('filtreOrga')->getData();
+        var_dump($filtreOrga);
+        $filtreInscrit = $searchSortieForm->get('filtreInscrit')->getData();
+        var_dump($filtreInscrit);
+        $filtrePasInscrit = $searchSortieForm->get('filtrePasInscrit')->getData();
+        var_dump($filtrePasInscrit);
+        $filtreSortiesPasse = $searchSortieForm->get('filtreSortiesPasse')->getData();
+        var_dump($filtreSortiesPasse);
 
-//        $valeurSaisie = $searchSortieForm->get("")->getData();
+        if ($searchSortieForm->isSubmitted() && $searchSortieForm->isValid()) {
+
+            $sorties = $sortieRepository->findByFilters($valeurSaisie,$dateDebut,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse);
+
+            return $this->render('sortie/home.html.twig', [
+                'searchSortieForm' => $searchSortieForm->createView(),
+                'sorties' => $sorties
+            ]);
+        }
+
         $sorties = $sortieRepository->findAll();
 
         return $this->render('sortie/home.html.twig', [
@@ -184,6 +206,8 @@ class SortieController extends AbstractController
 
         $today = new DateTime();
 
+       // dd($sortie->getDateCloture());
+
         if ($today>$sortie->getDateCloture()){
             $this->addFlash('success', "Date limite d'inscription dépassée, essayez une prochaine fois ... !");
 
@@ -224,7 +248,7 @@ class SortieController extends AbstractController
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
-            $etat = $etatRepository->find(54);
+            $etat = $etatRepository->find(6);
             dump($etat);
 
             $sortie->setEtat($etat);

@@ -129,14 +129,26 @@ class SortieRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findByFilters($contient)
+    public function findByFilters($contient,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse)
     {
+//,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse
+
+
         $entityManager = $this->getEntityManager();
 
         $dql = "SELECT s FROM App\Entity\Sortie s WHERE 1=1 ";
 
-        if($contient !== "")
+        if(isset($contient))
             $dql = $dql . " AND (s.nom LIKE '%" . $contient . "%' OR s.description LIKE '%" . $contient . "%')";
+
+        if(isset($dateDebut) && isset($dateFin)){
+
+            $sortieDate = $this->findByDateFilters($dateDebut,$dateFin);
+            dd($sortieDate);
+        }
+
+        if (isset($filtreOrga))
+
 
         $query = $entityManager->createQuery($dql);
 
@@ -149,7 +161,7 @@ class SortieRepository extends ServiceEntityRepository
 
         $dql = "SELECT s FROM App\Entity\Sortie s WHERE 1=1 ";
 
-        if($dateDebut !== "")
+        if ($dateDebut != "")
             $dql = $dql . "(BETWEEN" . $dateDebut . "AND" . $dateFin . " );" ;
 
 

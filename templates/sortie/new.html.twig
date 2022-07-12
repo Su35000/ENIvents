@@ -26,9 +26,8 @@
             {{ form_row(sortieForm.description) }}
             <div class="div_form">
                 {{ form_row(sortieForm.lieu) }}
-                <button class="btn"> Ajouter un lieu</button>
+                <button class="btn"> <a href="{{ path('lieu_new') }}"> Ajouter un lieu </a></button>
             </div>
-            {{ form_start(sortieForm) }}
             {{ form_widget(sortieForm) }}
             {#  {{ form_row(sortieForm.lieu) }} #}
 

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,29 +31,36 @@ class SearchSortieType extends AbstractType
                 return $site ? ['class' => 'site_'.strtolower($site->getNom())] : [];
                 }
             ])*/
-            ->add('le_nom_de_la_sortie_contient', SearchType::class, [
+            ->add('le_nom_de_la_sortie_contient', TextType::class, [
+                'mapped' =>false,
                 'required' => false,
             ])
-            ->add('Entre', DateTimeType::class, [
+            ->add('entre', DateTimeType::class, [
+                'mapped' =>false,
                 'required' => false,
                 'html5' => true,
                 'widget' => 'single_text'
             ])
             ->add('et', DateTimeType::class, [
+                'mapped' =>false,
                 'required' => false,
                 'html5' => true,
                 'widget' => 'single_text'
             ])
             ->add('filtreOrga', CheckboxType::class, [
+                'mapped' =>false,
                 'required' => false,
             ])
             ->add('filtreInscrit', CheckboxType::class, [
+                'mapped' =>false,
                 'required' => false,
             ])
             ->add('filtrePasInscrit', CheckboxType::class, [
+                'mapped' =>false,
                 'required' => false,
             ])
             ->add('filtreSortiesPasse', CheckboxType::class, [
+                'mapped' =>false,
                 'required' => false,
             ])
         ;

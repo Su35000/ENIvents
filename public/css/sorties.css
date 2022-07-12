@@ -178,6 +178,7 @@ a {
     padding: 25px;
     border-radius: 100px;
     color: #DDDDDD;
+    pointer-events: none;
 
     font-family: Bebas-Regular, sans-serif;
     font-size: 20px;
