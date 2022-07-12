@@ -139,6 +139,7 @@ class SortieRepository extends ServiceEntityRepository
             $dql = $dql . " AND (s.nom LIKE '%" . $contient . "%' OR s.description LIKE '%" . $contient . "%')";
 
         $query = $entityManager->createQuery($dql);
+
         return $query->getResult();
     }
 
@@ -153,6 +154,7 @@ class SortieRepository extends ServiceEntityRepository
 
 
         $query = $entityManager->createQuery($dql);
+
         return $query->getResult();
     }
 

@@ -31,15 +31,15 @@ class ProfilType extends AbstractType
                 'first_options'  => ['label' => 'Mot de passe'],
                 'second_options' => ['label' => 'Ressaisir le mot de passe'],
             ])
-            ->add('site', EntityType::class, [
-                'class' => Site::class,
-                'choice_label' => 'nom',
-                'query_builder' => function(SiteRepository $siteRepository){
-                    $qb = $siteRepository->createQueryBuilder('s');
-                    $qb->addOrderBy('s.nom', 'ASC');
-                    return $qb;
-                }
-            ])
+//            ->add('site', EntityType::class, [
+//                'class' => Site::class,
+//                'choice_label' => 'nom',
+//                'query_builder' => function(SiteRepository $siteRepository){
+//                    $qb = $siteRepository->createQueryBuilder('s');
+//                    $qb->addOrderBy('s.nom', 'ASC');
+//                    return $qb;
+//                }
+//            ])
         ;
     }
 
