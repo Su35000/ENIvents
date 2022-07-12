@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{ asset('css/sorties.css') }}">
         <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
         <link rel="stylesheet" href="{{ asset('css/ville.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
         <link rel="stylesheet" href="{{ asset('css/site.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,6 +39,11 @@
 
         </footer>
         {% block extrastyles %}
+
+            <script type="text/javascript">
+                var chemin = "{{ app.request.getBaseURL() }}";
+                ChangeIt();
+            </script>
         {% endblock %}
     </body>
 </html>

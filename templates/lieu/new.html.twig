@@ -6,16 +6,19 @@
 {% endblock %}
 
 {% block body %}
+<div class="titre"><h1>Nouveau lieu</h1></div>
 
-    {{ form_start(lieuForm) }}
-    {{ form_row(lieuForm.ville) }}
-    {{ form_widget(lieuForm) }}
-
-    <button> Ajouter ce nouveau lieu </button>
-    <button class="add" title="Ajouter une ville"> <a href="ville_new">Ajouter une ville </a></button>
-    {{ form_end(lieuForm) }}
-
-
-
+    <div id="full-size">
+        <div class="formulaire">
+            {{ form_start(lieuForm) }}
+                <div class="div-form">
+                    {{ form_row(lieuForm.ville) }}
+                    {{ form_widget(lieuForm) }}
+                </div>
+            <button class="btn-login"> Ajouter ce nouveau lieu </button>
+            {{ form_end(lieuForm) }}
+            <span class="separator"></span>
+        </div>
+    </div>
 
 {% endblock %}

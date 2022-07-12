@@ -1,0 +1,10 @@
+.etiquette-admin{
+    background-color: white;
+    border-radius: 50px;
+    width: 65%;
+    padding: 20px;
+}
+
+.list-villes{
+    list-style: none;
+}

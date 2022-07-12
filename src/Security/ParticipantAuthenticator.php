@@ -29,7 +29,6 @@ class ParticipantAuthenticator extends AbstractLoginFormAuthenticator
     }
 
 
-
     public function authenticate(Request $request): Passport
     {
         $username = $request->request->get('identifier', '');

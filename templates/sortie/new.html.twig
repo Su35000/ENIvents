@@ -26,18 +26,18 @@
             {{ form_row(sortieForm.description) }}
             <div class="div_form">
                 {{ form_row(sortieForm.lieu) }}
-                <a class="btn-login" href="{{ path('lieu_new') }}">Ajouter un lieu</a>
+                {{ form_row(sortieForm.ville) }}
             </div>
             <div class="div_form">
-                {{ form_row(sortieForm.ville) }}
-                <a class="btn-login" href="{{ path('ville_new') }}"> Ajouter une ville </a>
+                <a class="btn-login" href="{{ path('lieu_new') }}">Ajouter un lieu</a>
+                {{ form_widget(sortieForm) }}
             </div>
+            <span class="separator"></span>
 
-            {{ form_widget(sortieForm) }}
+
             <span>
-            <button class="btn-login"> Créer l'événement !</button>
-            {{ form_end(sortieForm) }}
-
+                <button class="btn-login"> Créer l'événement !</button>
+                {{ form_end(sortieForm) }}
             </span>
         </div>
     </div>

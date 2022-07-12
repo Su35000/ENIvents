@@ -90,6 +90,7 @@ body {
     border: none;
     margin: 10px 0 0 0;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 input[type=text], input[type=password], input[type=datetime-local], textarea, select {
