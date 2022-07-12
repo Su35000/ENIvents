@@ -6,8 +6,10 @@ use App\Entity\Etat;
 use App\Entity\Inscription;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\CancelSortieType;
 use App\Form\SearchSortieType;
 use App\Form\SortieType;
+use App\Repository\EtatRepository;
 use App\Repository\InscriptionRepository;
 use App\Repository\SortieRepository;
 use App\Repository\ParticipantRepository;
@@ -169,7 +171,7 @@ class SortieController extends AbstractController
     }
 
     #[Route('/annulation/{id}', name: 'annulation')]
-    public function annulation(int $id, Request $request, SortieRepository $sortieRep): Response
+    public function annulation(int $id, Request $request, SortieRepository $sortieRep, EtatRepository $etatRepository): Response
     {
         $sortie = $sortieRep->find($id);
 
@@ -179,10 +181,15 @@ class SortieController extends AbstractController
             throw $this->createNotFoundException("O0Oo0PS ! La sortie n'existe pas !");
         }
 
-        $sortieForm = $this->createForm(SortieType::class, $sortie);
+        $sortieForm = $this->createForm(cancelSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+            $etat = $etatRepository->find(54);
+            dump($etat);
+
+            $sortie->setEtat($etat);
 
             $sortieRep->add($sortie, true);
 
