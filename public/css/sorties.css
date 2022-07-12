@@ -1,11 +1,11 @@
 .display_sorties{
     display: flex;
     width: 80%;
-    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     margin-right: auto;
     margin-left: auto;
+    justify-content: center;
 }
 
 .bloc_sortie_archive{

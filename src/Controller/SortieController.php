@@ -26,50 +26,46 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
 
-
     #[Route('', name: 'home')]
     public function home(Request $request, SortieRepository $sortieRepository): Response
     {
-
         /**
          *
          * @var Participant $user
          */
         $user = $this->getUser();
 
-
         $searchSortieForm = $this->createForm(SearchSortieType::class);
         $searchSortieForm->handleRequest($request);
 
         $valeurSaisie = $searchSortieForm->get('le_nom_de_la_sortie_contient')->getData();
         $dateDebut = $searchSortieForm->get('entre')->getData();
-        var_dump($dateDebut);
         $dateFin = $searchSortieForm->get('et')->getData();
-        var_dump($dateFin);
         $filtreOrga = $searchSortieForm->get('filtreOrga')->getData();
-        var_dump($filtreOrga);
         $filtreInscrit = $searchSortieForm->get('filtreInscrit')->getData();
-        var_dump($filtreInscrit);
         $filtrePasInscrit = $searchSortieForm->get('filtrePasInscrit')->getData();
-        var_dump($filtrePasInscrit);
         $filtreSortiesPasse = $searchSortieForm->get('filtreSortiesPasse')->getData();
-        var_dump($filtreSortiesPasse);
+
 
         if ($searchSortieForm->isSubmitted() && $searchSortieForm->isValid()) {
+//
+            $sortiesRecherchees = $sortieRepository->findByFilters($valeurSaisie,$dateDebut,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse,$user);
+           // dd($sortiesRecherchees);
+//            $sortiesRecherchees = array();
+//
+//            if (isset($valeurSaisie)){
+//                $sortiesRecherchees = array_merge_recursive($sortiesRecherchees,$sortieRepository->findByFilters($valeurSaisie));
+//            }
+//
+//            if ($searchSortieForm->get('filtreOrga')->getData() == true){
+//                $sortiesOrga =$sortieRepository->findAllSortiesOrganiseesPar($user);
+//                $sortiesRecherchees = array_merge_recursive($sortiesRecherchees,$sortiesOrga);
+//            }
+//
+//            if ($searchSortieForm->get('filtreInscrit')->getData() == true){
+//                $sortiesRecherchees = array_merge_recursive($sortiesRecherchees,$sortieRepository->findAllSortiesParticipeesPar($user));
+//            }
 
-            $sortiesRecherchees = array();
-
-            $sorties = $sortieRepository->findByFilters($valeurSaisie,$dateDebut,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse);
-
-            if ($searchSortieForm->get('filtreOrga')->getData() == true){
-               array_merge($sortiesRecherchees,$sortieRepository->findAllSortiesOrganiseesPar($user));
-            }
-
-            if ($searchSortieForm->get('filtreInscrit')->getData() == true){
-                array_merge($sortiesRecherchees,$sortieRepository->findAllSortiesParticipeesPar($user));
-            }
-
-            dd($sortiesRecherchees);
             return $this->render('sortie/home.html.twig', [
                 'searchSortieForm' => $searchSortieForm->createView(),
                 'sorties' => $sortiesRecherchees
@@ -83,37 +79,6 @@ class SortieController extends AbstractController
             'sorties' => $sorties
         ]);
     }
-
-
-//    #[Route('', name: 'home')]
-//    public function home(Request $request, SortieRepository $sortieRepository, SiteRepository $siteRepository, int $id): Response
-//    {
-//       // $user = $this->getUser();
-//
-//       // $site = $siteRepository->find($id);
-//       // $site->getNom();
-//
-////        $searchSortieForm = $this->createForm(SearchSortieType::class);
-////        $searchSortieForm->handleRequest($request);
-//
-//        /*$valeurSaisie = $searchSortieForm->get("")->getData();*/
-//
-//        /*$dateDebut = $searchSortieForm->get("Entre")->getData();
-//        $dateFin = $searchSortieForm->get("et")->getData();*/
-//
-//        $sorties = $sortieRepository->findAll();
-//
-//        /*$sorties = $sortieRepository->findByFilters($valeurSaisie);*/
-//        /*$sorties = $sortieRepository->findByDateFilters($dateDebut, $dateFin);*/
-//
-//       //dd($sorties);
-//
-//        return $this->render('sortie/home.html.twig', [
-////            'searchSortieForm' => $searchSortieForm->createView(),
-//            'sorties' => $sorties,
-////            'site' => $site
-//        ]);
-//    }
 
 
     #[Route('/new', name: 'new')]

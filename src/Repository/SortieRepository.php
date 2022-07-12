@@ -129,25 +129,80 @@ class SortieRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findByFilters($contient)
+    public function findByFilters($contient,$dateDebut,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse,$user)
     {
-        $entityManager = $this->getEntityManager();
+        $query = $this
+            ->createQueryBuilder('s')
+            ->leftJoin('s.inscriptions', 'i')
+            ->leftJoin('i.participant', 'p')
 
-        $dql = "SELECT s FROM App\Entity\Sortie s WHERE 1=1 ";
+        ;
 
-        if(isset($contient))
-            $dql = $dql . " AND (s.nom LIKE '%" . $contient . "%' OR s.description LIKE '%" . $contient . "%')";
 
-//        if(isset($dateDebut) && isset($dateFin)){
-//
-//            $sortieDate = $this->findByDateFilters($dateDebut,$dateFin);
-//            dd($sortieDate);
-//        }
+        if(isset($contient)){
 
-        $query = $entityManager->createQuery($dql);
+            $query = $query
+                ->andWhere('s.nom LIKE :contient')
+                ->setParameter('contient', "%{$contient}%");}
 
-        return $query->getResult();
+          //  $dql = $dql . " AND (s.nom LIKE '%" . $contient . "%' OR s.description LIKE '%" . $contient . "%')";
+
+        if(isset($dateDebut)){
+            $query = $query
+                ->andWhere('s.dateHeureDebut > :date')
+                ->setParameter('date', $dateDebut);}
+
+        if(isset($dateFin)){
+            $query = $query
+                ->andWhere('s.dateHeureDebut < :date')
+                ->setParameter('date', $dateFin);}
+
+        if($filtreOrga === true){
+            $query = $query
+                ->andWhere('s.organisateur = :user')
+                ->setParameter('user', $user);}
+
+        if($filtreInscrit === true){
+            $query = $query
+                ->andWhere('i.participant IN (:participant)')
+                ->setParameter('participant', $user);}
+
+//        if($filtrePasInscrit === true){
+//            $query = $query
+//                ->andWhere(':user NOT MEMBER OF s.participant')
+//                ->setParameter('user', $user);}
+//        dump($query->getQuery());
+
+
+        $query = $query->getQuery()->getResult();
+
+        return $query;
     }
+
+
+
+//    public function findByFilters($contient)
+//    {
+
+
+
+//        $entityManager = $this->getEntityManager();
+//
+//        $dql = "SELECT s FROM App\Entity\Sortie s WHERE 1=1 ";
+//
+//        if(isset($contient))
+//            $dql = $dql . " AND (s.nom LIKE '%" . $contient . "%' OR s.description LIKE '%" . $contient . "%')";
+//
+////        if(isset($dateDebut) && isset($dateFin)){
+////
+////            $sortieDate = $this->findByDateFilters($dateDebut,$dateFin);
+////            dd($sortieDate);
+////        }
+//
+//        $query = $entityManager->createQuery($dql);
+//
+//        return $query->getResult();
+//    }
 
     public function findByDateFilters($dateDebut, $dateFin)
     {
