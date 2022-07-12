@@ -44,3 +44,7 @@ function textToInput(id){
         }
     }
 }
+
+function showDiv() {
+    document.getElementById('welcomeDiv').style.display = "block";
+}

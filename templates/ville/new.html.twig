@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    {{ form_start(villeForm) }}
+    <label for="nom_ville">Nom :</label>
+    {{ form_row(villeForm.nom) }}
+    <label for="codePostal">Code postal :</label>
+    {{ form_row(villeForm.codePostal) }}
+    <button> Ajouter la ville </button>
+    {{ form_end(villeForm) }}
+{% endblock %}
+

@@ -50,11 +50,14 @@
 
 
             {% if app.user.id == sortie.organisateur.id%}
-                <a href={{ path('profil_details') }}><button class="btn-login"> Supprimer la sortie </button></a>
-            {% else %}
-                <button class="btn-login"> Contacter l'organisateur </button>
+                <a href={{ path('profil_details') }}><button class="btn-login"> Gérer les sorties </button></a>
             {% endif %}
 
+            {% for participant in participants %}
+                {% if app.user.id == participant.id %}
+                    <a href=""><button class="btn-login"> Se désister </button></a>
+                {% endif %}
+            {% endfor %}
 
         </div>
     </div>

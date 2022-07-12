@@ -5,7 +5,7 @@
             <li><a href="{{ path('sortie_home') }}" title="Home">Les sorties</a></li>
             <li><a href="{{ path('sortie_new') }}" title="Organiser un évènement">Nouvelle Sortie</a></li>
             <li><a href="{{ path('profil_details') }}" title="Mon profil">Mon profil</a></li>
-            <li><a href="{{ path('app_logout') }}" title="Logout">Logout</a></li>
+            <li><a href="{{ path('app_logout') }}" title="Logout">Déconnexion</a></li>
         {% endif %}
         {% if is_granted("ROLE_ADMIN") %}
             <li><a href="{{ path('ville_list') }}" title="Home">Villes</a></li>

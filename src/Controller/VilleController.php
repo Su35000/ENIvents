@@ -38,6 +38,43 @@ class VilleController extends AbstractController
         ]);
     }
 
+    #[Route('/new', name: 'new')]
+    public function new(Request $request, VilleRepository $villeRepository): Response
+    {
+
+        $ville = new Ville();
+
+        $villeForm = $this->createForm(VilleType::class, $ville);
+        $villeForm->handleRequest(($request));
+
+
+        if ($villeForm->isSubmitted() && $villeForm->isValid()) {
+
+//            /**
+//             * @var Ville $ville
+//             */
+//
+//            $nomVille = $villeForm->get('ville')->getData();
+//            $cpo = $villeForm->get('cpo')->getData();
+//
+//            $ville->setNom($nomVille);
+//            $ville->setCodePostal($cpo);
+
+
+
+
+            $villeRepository->add($ville, true);
+
+            $this->addFlash('success', "Le ville a bien été ajouté.");
+
+            return $this->redirectToRoute('sortie_new');
+        }
+
+        return $this->render('ville/new.html.twig', [
+            'villeForm' => $villeForm->createView()
+        ]);
+    }
+
     #[Route('/edit/{id}', name: 'edit')]
     public function edit(VilleRepository $villeRepository, int $id, Request $request): Response
     {

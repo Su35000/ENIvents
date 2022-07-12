@@ -39,13 +39,13 @@ class SortieType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Description'
             ])
-//            ->add('ville', EntityType::class,[
-//                'label' => 'Ville',
-//                'mapped' =>false,
-//                'class'=> Ville::class,
-//                'choice_label' => function(?Ville $ville) {
-//                    return $ville ? strtoupper($ville->getNom()) : '';}
-//            ])
+            ->add('ville', EntityType::class,[
+                'label' => 'Ville',
+                'mapped' =>false,
+                'class'=> Ville::class,
+                'choice_label' => function(?Ville $ville) {
+                    return $ville ? strtoupper($ville->getNom()) : '';}
+            ])
             ->add('lieu', EntityType::class,[
                 'label' => 'Lieu',
                 'class'=> Lieu::class,
