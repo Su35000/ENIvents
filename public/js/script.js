@@ -1,9 +1,10 @@
-var totalCount = 5;
+
 
 
 
 function ChangeIt()
 {
+    var totalCount = 5;
     var num = Math.ceil( Math.random() * totalCount );
     document.body.background = chemin+'/img/backgrounds/'+num+'.svg';
     document.body.style.backgroundRepeat = "no-repeat";
@@ -13,6 +14,7 @@ function ChangeIt()
 
 function ChangeSortiePicture()
 {
+    var totalCount = 9;
     let listeElement = document.getElementsByClassName("random_image")
 
     Array.prototype.forEach.call(listeElement, function(el) {

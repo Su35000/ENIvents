@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use App\Entity\Inscription;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\expr;
 
 /**
  * @extends ServiceEntityRepository<Sortie>
@@ -83,6 +84,7 @@ class SortieRepository extends ServiceEntityRepository
             ->setParameter('participant', $organisateur)
             ->orderBy('s.dateHeureDebut' ,'DESC');
 
+
         $query = $qb->getQuery()->getResult();
         return $query;
     }
@@ -125,6 +127,66 @@ class SortieRepository extends ServiceEntityRepository
          ->getOneOrNullResult();
 
         return $query->getResult();
+    }
+
+    public function findByFilters($contient)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $dql = "SELECT s FROM App\Entity\Sortie s WHERE 1=1 ";
+
+        if($contient !== "")
+            $dql = $dql . " AND (s.nom LIKE '%" . $contient . "%' OR s.description LIKE '%" . $contient . "%')";
+
+        $query = $entityManager->createQuery($dql);
+
+        return $query->getResult();
+    }
+
+    public function findByDateFilters($dateDebut, $dateFin)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $dql = "SELECT s FROM App\Entity\Sortie s WHERE 1=1 ";
+
+        if($dateDebut !== "")
+            $dql = $dql . "(BETWEEN" . $dateDebut . "AND" . $dateFin . " );" ;
+
+
+        $query = $entityManager->createQuery($dql);
+
+        return $query->getResult();
+    }
+
+    public function filterSortiesByCriteria(Participant $organisateur, Participant $participant)
+    {
+
+
+
+
+
+        //je récupère toutes mes sorties
+     /*   $qb = $this->createQueryBuilder('s');
+        //liaison avec la table inscription
+        $qb->leftJoin('s.inscriptions', 'i');
+        $qb->leftJoin('i.participant', 'p');
+
+        $qb->Where(expr()->('s.organisateur IN (:participant)')
+            ->setParameter('participant', $organisateur)
+            ->orderBy('s.dateHeureDebut' ,'DESC'));
+
+
+        $qb->expr()->$qb->Where('i.participant IN (:participant)')
+            ->setParameter('participant', $participant)
+            ->orderBy('s.dateHeureDebut' ,'DESC');
+
+
+        $query = $qb->getQuery()->getResult();
+        return $query;*/
+
+
+
+
     }
 
 

@@ -11,6 +11,7 @@ use App\Form\SearchSortieType;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\InscriptionRepository;
+use App\Repository\SiteRepository;
 use App\Repository\SortieRepository;
 use App\Repository\ParticipantRepository;
 use DateTime;
@@ -18,26 +19,60 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\Form\View;
+
 
 
 #[Route('/sortie', name: 'sortie_')]
 class SortieController extends AbstractController
 {
+
+
     #[Route('', name: 'home')]
     public function home(Request $request, SortieRepository $sortieRepository): Response
     {
         $searchSortieForm = $this->createForm(SearchSortieType::class);
         $searchSortieForm->handleRequest($request);
 
-        $sorties = $sortieRepository->findAllSorties();
+
+//        $valeurSaisie = $searchSortieForm->get("")->getData();
+        $sorties = $sortieRepository->findAll();
 
         return $this->render('sortie/home.html.twig', [
             'searchSortieForm' => $searchSortieForm->createView(),
             'sorties' => $sorties
         ]);
     }
+
+
+//    #[Route('', name: 'home')]
+//    public function home(Request $request, SortieRepository $sortieRepository, SiteRepository $siteRepository, int $id): Response
+//    {
+//       // $user = $this->getUser();
+//
+//       // $site = $siteRepository->find($id);
+//       // $site->getNom();
+//
+////        $searchSortieForm = $this->createForm(SearchSortieType::class);
+////        $searchSortieForm->handleRequest($request);
+//
+//        /*$valeurSaisie = $searchSortieForm->get("")->getData();*/
+//
+//        /*$dateDebut = $searchSortieForm->get("Entre")->getData();
+//        $dateFin = $searchSortieForm->get("et")->getData();*/
+//
+//        $sorties = $sortieRepository->findAll();
+//
+//        /*$sorties = $sortieRepository->findByFilters($valeurSaisie);*/
+//        /*$sorties = $sortieRepository->findByDateFilters($dateDebut, $dateFin);*/
+//
+//       //dd($sorties);
+//
+//        return $this->render('sortie/home.html.twig', [
+////            'searchSortieForm' => $searchSortieForm->createView(),
+//            'sorties' => $sorties,
+////            'site' => $site
+//        ]);
+//    }
 
 
     #[Route('/new', name: 'new')]
@@ -135,6 +170,9 @@ class SortieController extends AbstractController
         $inscription = new Inscription();
 
         $participant = $this->getUser();
+
+        //dump($participant);
+
 
         $sortie = $sortieRep->find($id);
 

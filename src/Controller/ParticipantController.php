@@ -44,7 +44,7 @@ class ParticipantController extends AbstractController
             $participantRepository->add($profil, true);
 
             $this->addFlash("success", "Profil modifié !");
-            return $this->redirectToRoute("profil_edit");
+            return $this->redirectToRoute("profil_details");
         }
 
         return $this->render('profil/edit.html.twig', [
