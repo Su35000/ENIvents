@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="titre"><h1>Modification d'une ville </h1></div>
 
+<div id="full-size">
+    <div class="etiquette-admin">
+        <div class="div_form">
     {{ form_start(villeForm) }}
     {{ form_widget(villeForm) }}
-    <button>Submit</button>
+    <button class="btn-login">Enregistrer</button>
     {{ form_end(villeForm) }}
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block title %}
