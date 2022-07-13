@@ -4,35 +4,28 @@
 {% endblock %}
 
 {% block body %}
-    <div class="titre"><h1>Profil</h1></div>
+
+<div class="titre"><h1>Profil de {{ user.username }} </h1></div>
 
     <div id="full-size">
-        <div class="formulaire">
+        <div class="etiquette">
+            <div class="flex_row">
 
-            <label> Pseudo </label>
-            <div> {{ user.username }} </div>
-            <div class="div_form">
-                <div class="div_form">
-                    <div>
-{#                        <label> Nom </label>#}
-                        <div> {{ user.nom }} </div>
-                    </div>
-                    <div>
-{#                        <label> Prenom </label>#}
-                        <div> {{ user.prenom }} </div>
-                    </div>
-                </div>
-                <div class="div_form">
-                    <div>
-                        <label> Telephone </label>
-                        <div> {{ user.telephone }} </div>
-                    </div>
-                    <div>
-                        <label> Email </label>
-                        <div> {{ user.email }} </div>
-                    </div>
-                </div>
 
+                <div class="margin" style=" font-size: 20px;">
+                    <div> Nom :</div>
+                    <div> Prénom :</div>
+                    <div> Telephone :</div>
+                    <div> Email :</div>
+                </div>
+                <div style="text-align: left; font-size: 20px;">
+                    <div> {{ user.nom }} </div>
+                    <div> {{ user.prenom }} </div>
+                    <div> {{ user.telephone }} </div>
+                    <div> {{ user.email }} </div>
+                </div>
+            </div>
+        </div>
 {% endblock %}
 
 

@@ -23,14 +23,14 @@ class ProfilType extends AbstractType
             ->add('nom', TextType::class)
             ->add('telephone', TextType::class)
             ->add('email', TextType::class)
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Les mots de passes ne correspondent pas.',
-                'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Ressaisir le mot de passe'],
-            ])
+//            ->add('password', RepeatedType::class, [
+//                'type' => PasswordType::class,
+//                'invalid_message' => 'Les mots de passes ne correspondent pas.',
+//                'options' => ['attr' => ['class' => 'password-field']],
+//                'required' => true,
+//                'first_options'  => ['label' => 'Mot de passe'],
+//                'second_options' => ['label' => 'Ressaisir le mot de passe'],
+//            ])
 //            ->add('site', EntityType::class, [
 //                'class' => Site::class,
 //                'choice_label' => 'nom',

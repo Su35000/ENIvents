@@ -38,33 +38,17 @@ class SortieController extends AbstractController
         $searchSortieForm = $this->createForm(SearchSortieType::class);
         $searchSortieForm->handleRequest($request);
 
-        $valeurSaisie = $searchSortieForm->get('le_nom_de_la_sortie_contient')->getData();
-        $dateDebut = $searchSortieForm->get('entre')->getData();
-        $dateFin = $searchSortieForm->get('et')->getData();
-        $filtreOrga = $searchSortieForm->get('filtreOrga')->getData();
-        $filtreInscrit = $searchSortieForm->get('filtreInscrit')->getData();
-        $filtrePasInscrit = $searchSortieForm->get('filtrePasInscrit')->getData();
-        $filtreSortiesPasse = $searchSortieForm->get('filtreSortiesPasse')->getData();
-
-
         if ($searchSortieForm->isSubmitted() && $searchSortieForm->isValid()) {
 
+            $valeurSaisie = $searchSortieForm->get('le_nom_de_la_sortie_contient')->getData();
+            $dateDebut = $searchSortieForm->get('entre')->getData();
+            $dateFin = $searchSortieForm->get('et')->getData();
+            $filtreOrga = $searchSortieForm->get('filtreOrga')->getData();
+            $filtreInscrit = $searchSortieForm->get('filtreInscrit')->getData();
+            $filtrePasInscrit = $searchSortieForm->get('filtrePasInscrit')->getData();
+            $filtreSortiesPasse = $searchSortieForm->get('filtreSortiesPasse')->getData();
+
             $sortiesRecherchees = $sortieRepository->findByFilters($valeurSaisie,$dateDebut,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse,$user);
-           // dd($sortiesRecherchees);
-//            $sortiesRecherchees = array();
-//
-//            if (isset($valeurSaisie)){
-//                $sortiesRecherchees = array_merge_recursive($sortiesRecherchees,$sortieRepository->findByFilters($valeurSaisie));
-//            }
-//
-//            if ($searchSortieForm->get('filtreOrga')->getData() == true){
-//                $sortiesOrga =$sortieRepository->findAllSortiesOrganiseesPar($user);
-//                $sortiesRecherchees = array_merge_recursive($sortiesRecherchees,$sortiesOrga);
-//            }
-//
-//            if ($searchSortieForm->get('filtreInscrit')->getData() == true){
-//                $sortiesRecherchees = array_merge_recursive($sortiesRecherchees,$sortieRepository->findAllSortiesParticipeesPar($user));
-//            }
 
             return $this->render('sortie/home.html.twig', [
                 'searchSortieForm' => $searchSortieForm->createView(),
@@ -72,7 +56,7 @@ class SortieController extends AbstractController
             ]);
         }
 
-        $sorties = $sortieRepository->findAll();
+        $sorties = $sortieRepository->findAllSorties();
 
         return $this->render('sortie/home.html.twig', [
             'searchSortieForm' => $searchSortieForm->createView(),
@@ -233,7 +217,6 @@ class SortieController extends AbstractController
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
 
             $etat = $etatRepository->find(6);
-            dump($etat);
 
             $sortie->setEtat($etat);
 
@@ -241,7 +224,7 @@ class SortieController extends AbstractController
 
             $this->addFlash('success', "L'évènement a bien été annulé");
 
-            return $this->redirectToRoute('sortie_details', [
+            return $this->redirectToRoute('sortie_home', [
                 'id' => $sortie->getId()
             ]);
         }

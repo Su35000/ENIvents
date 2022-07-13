@@ -50,9 +50,19 @@ class SortieRepository extends ServiceEntityRepository
         //liaison avec la table particpant
         $qb->leftJoin('s.inscriptions', 'i');
         $qb->leftJoin('i.participant', 'participant');
-        $qb->leftJoin('s.organisateur', 'o')
-        ->orderBy('s.dateHeureDebut' ,'DESC');
+        $qb->join('s.etat', 'etat');
+        $qb->join('s.lieu', 'lieu');
+        $qb->join('lieu.ville', 'ville');
+        $qb->addSelect('i');
+        $qb->addSelect('lieu');
+        $qb->addSelect('ville');
+        $qb->addSelect('etat');
+        $qb->addSelect('participant');
+        $qb->addOrderBy('s.etat' ,'ASC');
+        $qb->addOrderBy('s.dateHeureDebut' ,'DESC');
+
         $query = $qb->getQuery()->getResult();
+
         return $query;
     }
 

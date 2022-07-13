@@ -10,7 +10,6 @@
         <div class="etiquette">
             <div class="flex_row">
 
-
                 <div class="margin ">
                     <div> Pseudo :</div>
                     <div> Nom :</div>
@@ -34,16 +33,28 @@
 
                 <div>
                     <div class="titre_noir"> J'organise ...</div>
-                    <div class="" >
+                    <div class="">
                         {% for sortie in sortiesOrganisees %}
-                            <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">
-                                <div>  <strong>{{ sortie.nom }}</strong> | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
-                                    à {{ sortie.dateHeureDebut|date("H:i") }} </div>
-                                <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
-                            </a>
-                            <button> <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">Voir </a></button>
-                            <button> <a href="{{ path('sortie_annulation', {'id':sortie.id()}) }}">Annuler </a></button>
-                            <br> <span> - </span>
+                            {% if (sortie.etat.libelle == 'archivee' or sortie.etat.libelle == 'annulee' or sortie.etat.libelle == 'passee') %}
+                                    <div><strong>{{ sortie.nom }}</strong> |
+                                        le {{ sortie.dateHeureDebut|date("m/d/Y") }}
+                                        à {{ sortie.dateHeureDebut|date("H:i") }} </div>
+                                    <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
+                                <div><strong> {{  sortie.etat.libelle }} </strong> : Sortie non consultable </div>
+                                <br> <span> - </span>
+                            {% else %}
+                                <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">
+                                    <div><strong>{{ sortie.nom }}</strong> |
+                                        le {{ sortie.dateHeureDebut|date("m/d/Y") }}
+                                        à {{ sortie.dateHeureDebut|date("H:i") }} </div>
+                                    <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
+                                </a>
+                                <button><a href="{{ path('sortie_details', {'id':sortie.id()}) }}">Voir </a></button>
+                                <button><a href="{{ path('sortie_annulation', {'id':sortie.id()}) }}">Annuler </a>
+                                </button>
+                                <br> <span> - </span>
+
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -52,28 +63,19 @@
                     <div>
                         {% for sortie in sortiesParticipees %}
                             <div>
-                                <div>  <strong>{{ sortie.nom }}</strong> | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
+                                <div><strong>{{ sortie.nom }}</strong> | le {{ sortie.dateHeureDebut|date("m/d/Y") }}
                                     à {{ sortie.dateHeureDebut|date("H:i") }} </div>
                                 <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</div>
                             </div>
-                            <button> <a href="{{ path('sortie_details', {'id':sortie.id()}) }}">Voir </a></button>
-                            <button> <a> Se désister </a> </button>
+                            <button><a href="{{ path('sortie_details', {'id':sortie.id()}) }}">Voir </a></button>
+                            <button><a> Se désister </a></button>
                             <br><span> - </span>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
     </div>
-
-
-    {#        <button class="btn-login"> Modifier mon profil</button> #}
-
-
 
 
 {% endblock %}
