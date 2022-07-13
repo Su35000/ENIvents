@@ -38,7 +38,7 @@
 
         {% for sortie in sorties %}
 
-            {% if sortie.etat.libelle == 'archivee' %}
+            {% if (sortie.etat.libelle == 'archivee' or sortie.etat.libelle == 'annulee' or sortie.etat.libelle == 'passee') %}
 
 
                 <div class="bloc_sortie_archive">

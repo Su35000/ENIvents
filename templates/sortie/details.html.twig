@@ -14,13 +14,13 @@
                         <a href={{ path('sortie_annulation', {'id':sortie.id()}) }}>
                             <button class="btn-login"> Annuler la sortie</button>
                         </a>
+
                     {% elseif app.user in participants %}
                         <a href="">
                             <button class="btn-login"> Se désister</button>
                         </a>
 
                     {% else %}
-
                         <a href="{{ path('sortie_enlist', {'id':sortie.id()}) }}">
                             <button class="btn-login"> S'inscrire</button>
                         </a>

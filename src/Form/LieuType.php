@@ -21,12 +21,12 @@ class LieuType extends AbstractType
                 'mapped' =>false,
                 'required'=>false
             ])
-            ->add('ville', EntityType::class,[
-                'label' => 'Ville',
-                'class'=> Ville::class,
-                'choice_label' => function(?Ville $ville) {
-                    return $ville ? strtoupper($ville->getNom()) : '';}
-            ])
+//            ->add('ville', EntityType::class,[
+//                'label' => 'Ville',
+//                'class'=> Ville::class,
+//                'choice_label' => function(?Ville $ville) {
+//                    return $ville ? strtoupper($ville->getNom()) : '';}
+//            ])
 //            ->add('cpo', TextType::class,[
 //                'label' => 'Code Postal',
 //                'mapped' =>false
