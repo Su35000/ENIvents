@@ -6,60 +6,72 @@
     <div class="titre"><h1>Détails de la sortie</h1></div>
 
     <div id="full-size">
-        <div class="formulaire">
+        <div class="etiquette">
+            <div class="flex_colonne">
+                <h1 class="titre_noir">{{ sortie.nom }}</h1>
+                <div>
+                    {% if app.user.id == sortie.organisateur.id %}
+                        <a href={{ path('sortie_annulation', {'id':sortie.id()}) }}>
+                            <button class="btn-login"> Annuler la sortie</button>
+                        </a>
+                    {% elseif app.user in participants %}
+                        <a href="">
+                            <button class="btn-login"> Se désister</button>
+                        </a>
 
-            <h1>{{ sortie.nom }}</h1>
+                    {% else %}
+
+                        <a href="{{ path('sortie_enlist', {'id':sortie.id()}) }}">
+                            <button class="btn-login"> S'inscrire</button>
+                        </a>
+
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex_row">
+
+                <div class="margin ">
+                    <div> Organisateur :</div>
+                    <div> Lieu et ville :</div>
+                    <div> Date et Heure de début :</div>
+                    <div> Nombre de participants max :</div>
+                    <div> Etat de l'inscription :</div>
+                </div>
+                <div style="text-align: left;">
+                    <div><a href="{{ path('profil_detailsById',{'id': sortie.organisateur.id}) }}">
+                            <strong>{{ sortie.organisateur.nom }} {{ sortie.organisateur.prenom }} </strong></a></div>
+                    <div> {{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }} </div>
+                    <div> {{ sortie.dateHeureDebut|date('Y-m-d') }} à {{ sortie.dateHeureDebut|date('H:i') }}mn</div>
+                    <div> {{ sortie.nbInscritMax }} </div>
+                    <div> {{ sortie.etat.libelle }} </div>
+                </div>
 
 
-            <div class="div_form">
                 <div class="div_form">
-                    {{ sortie.etat.libelle }}
-                    {{ sortie.lieu.ville.nom }}
-                </div>
-                <div class="div_form">
-                    {{ sortie.nbInscritMax }}
+                    {{ sortie.description }}
 
                 </div>
-            </div>
-            <div class="div_form">
-                {{ sortie.description }}
 
-            </div>
+                <span class="separator"> </span>
 
-            <span class="separator"> </span>
-
-
-            <div class="div_form">
-                <a href="{{ path('profil_detailsById',{'id': sortie.organisateur.id}) }}"> {{ sortie.organisateur.nom }} {{ sortie.organisateur.prenom }}</a>
-            </div>
-
-            <div class="list-participant">
-                <div class="pseudo-participant">
-                    <ul>
-                    {% for participant in participants %}
-                        <li> <a href="{{ path('profil_detailsById',{'id': participant.id }) }}"> {{ participant.username }} </a> </li>
-                    {% endfor %}
-                    </ul>
+                <div class="titre_noir"> Ils y participent ...</div>
+                <div class="list-sorties">
+                    <div class="pseudo-participant">
+                        <ul>
+                            {% for participant in participants %}
+                                <li>
+                                    <a href="{{ path('profil_detailsById',{'id': participant.id }) }}"> {{ participant.username }} : {{ participant.nom }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
-                <div class="nom-participant">
-                    {% for participant in participants %}
-                        <li> <a href="{{ path('profil_detailsById',{'id': participant.id }) }}"> {{ participant.nom }} </a> </li>
-                    {% endfor %}
-                </div>
+
+
             </div>
-
-
-            {% if app.user.id == sortie.organisateur.id%}
-                <a href={{ path('profil_details') }}><button class="btn-login"> Gérer les sorties </button></a>
-            {% endif %}
-
-            {% for participant in participants %}
-                {% if app.user.id == participant.id %}
-                    <a href=""><button class="btn-login"> Se désister </button></a>
-                {% endif %}
-            {% endfor %}
 
         </div>
+
     </div>
 
 
@@ -70,8 +82,8 @@
 
             {% block extrastyles %}
                 <style>
-                    body{
-                        background-image: linear-gradient(top, rgba(255,0,0,0), #ee403d);
+                    body {
+                        background-image: linear-gradient(top, rgba(255, 0, 0, 0), #ee403d);
                     }
                 </style>
 

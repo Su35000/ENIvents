@@ -131,11 +131,9 @@ class SortieRepository extends ServiceEntityRepository
 
     public function findByFilters($contient,$dateDebut,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse,$user)
     {
-        $query = $this
-            ->createQueryBuilder('s')
+        $query = $this->createQueryBuilder('s')
             ->leftJoin('s.inscriptions', 'i')
             ->leftJoin('i.participant', 'p')
-
         ;
 
 
@@ -167,12 +165,22 @@ class SortieRepository extends ServiceEntityRepository
                 ->andWhere('i.participant IN (:participant)')
                 ->setParameter('participant', $user);}
 
+
+
 //        if($filtrePasInscrit === true){
 //            $query = $query
-//                ->andWhere(':user NOT MEMBER OF s.participant')
-//                ->setParameter('user', $user);}
+//                ->andWhere('(:participant) i.participant')
+////                ->andWhere(':user NOT MEMBER OF s.inscriptions.participant')
+////                ->setParameter('user', $user);
+//                ->setParameter('participant', $user);
+//        }
 //        dump($query->getQuery());
 
+
+        if($filtreSortiesPasse === true){
+            $query = $query
+                ->andWhere('s.etat = :etat')
+                ->setParameter('etat', 7);}
 
         $query = $query->getQuery()->getResult();
 

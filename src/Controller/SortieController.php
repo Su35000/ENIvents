@@ -48,7 +48,7 @@ class SortieController extends AbstractController
 
 
         if ($searchSortieForm->isSubmitted() && $searchSortieForm->isValid()) {
-//
+
             $sortiesRecherchees = $sortieRepository->findByFilters($valeurSaisie,$dateDebut,$dateFin,$filtreOrga,$filtreInscrit,$filtrePasInscrit,$filtreSortiesPasse,$user);
            // dd($sortiesRecherchees);
 //            $sortiesRecherchees = array();
