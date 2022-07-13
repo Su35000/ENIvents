@@ -11,8 +11,8 @@
 
             <div class="margin">
                 {{ form_start(searchSortieForm) }}
-{#                {{ form_row(searchSortieForm.ville) }}#}
                 {{ form_row(searchSortieForm.le_nom_de_la_sortie_contient) }}
+                {{ form_row(searchSortieForm.ville) }}
             </div>
             <div class="margin">
                 {{ form_row(searchSortieForm.entre) }}
@@ -21,12 +21,11 @@
             <div class="margin">
                 {{ form_row(searchSortieForm.filtreOrga) }}
                 {{ form_row(searchSortieForm.filtreInscrit) }}
-                {{ form_row(searchSortieForm.filtrePasInscrit) }}
+{#                {{ form_row(searchSortieForm.filtrePasInscrit) }}#}
                 {{ form_row(searchSortieForm.filtreSortiesPasse) }}</div>
 
-
             <div>
-                <button class="btn-login"> Rechercher</button>
+                <button style="margin-top: 100px;" class="btn-login"> Rechercher</button>
             </div>
 
             {{ form_end(searchSortieForm) }}</div>

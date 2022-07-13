@@ -41,6 +41,7 @@ class SortieController extends AbstractController
         if ($searchSortieForm->isSubmitted() && $searchSortieForm->isValid()) {
 
             $valeurSaisie = $searchSortieForm->get('le_nom_de_la_sortie_contient')->getData();
+            $ville = $searchSortieForm->get('ville')->getData();
             $dateDebut = $searchSortieForm->get('entre')->getData();
             $dateFin = $searchSortieForm->get('et')->getData();
             $filtreOrga = $searchSortieForm->get('filtreOrga')->getData();

@@ -16,17 +16,18 @@ use Symfony\Component\Security\Core\Security;
 #[Route('/profil', name: 'profil_')]
 class ParticipantController extends AbstractController
 {
-    #[Route('/edit', name: 'edit')]
-    public function edit(UserPasswordHasherInterface $userPasswordHasher, ParticipantRepository $participantRepository, Request $request): Response
+
+    #[Route('/edit/{id}', name: 'edit')]
+    public function edit(int $id, UserPasswordHasherInterface $userPasswordHasher, ParticipantRepository $participantRepository, Request $request): Response
     {
 
-        //Récupération des infos du profil
-        $participant = $participantRepository->findOneBy([
-            'username' => $this->getUser()->getUserIdentifier()
-        ]);
+//        //Récupération des infos du profil
+//        $participant = $participantRepository->findOneBy([
+//            'username' => $this->getUser()->getUserIdentifier()
+//        ]);
 
 
-       // $participant = new Participant();
+         $participant = $participantRepository->find($id);
 
         //Cas d'erreur
         if (!$participant) {
@@ -47,13 +48,54 @@ class ParticipantController extends AbstractController
             $participantRepository->add($participant, true);
 
             $this->addFlash("success", "Profil modifié !");
-            return $this->redirectToRoute("profil_details");
+            return $this->redirectToRoute("profil_detailsById",[
+                'id' => $participant->getId()
+            ]);
         }
 
         return $this->render('profil/edit.html.twig', [
             "profilForm" => $profilForm->createView(),
         ]);
     }
+
+//    #[Route('/edit', name: 'edit')]
+//    public function edit(UserPasswordHasherInterface $userPasswordHasher, ParticipantRepository $participantRepository, Request $request): Response
+//    {
+//
+//        //Récupération des infos du profil
+//        $participant = $participantRepository->findOneBy([
+//            'username' => $this->getUser()->getUserIdentifier()
+//        ]);
+//
+//
+//       // $participant = new Participant();
+//
+//        //Cas d'erreur
+//        if (!$participant) {
+//            throw $this->createNotFoundException("Erreur : Profil introuvable !");
+//        }
+//
+//        $profilForm = $this->createForm(ProfilType::class, $participant);
+//        $profilForm->handleRequest($request);
+//
+//        if ($profilForm->isSubmitted() && $profilForm->isValid()) {
+//
+////            $participant->setPassword(
+////                $userPasswordHasher->hashPassword(
+////                    $participant,
+////                    $profilForm->get('password')->getData()
+////                )
+////            );
+//            $participantRepository->add($participant, true);
+//
+//            $this->addFlash("success", "Profil modifié !");
+//            return $this->redirectToRoute("profil_details");
+//        }
+//
+//        return $this->render('profil/edit.html.twig', [
+//            "profilForm" => $profilForm->createView(),
+//        ]);
+//    }
 
     #[Route('/details', name: 'details')]
     public function details(UserPasswordHasherInterface $userPasswordHasher, SortieRepository $sortieRep, ParticipantRepository $participantRepository, Request $request): Response
