@@ -5,23 +5,51 @@
     padding: 20px;
 }
 
+.li-villes{
+    padding: 11px 0;
+    border-bottom: black solid 1px;
+    text-align: center;
+}
+
+.listVilles-flex{
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .list-villes{
     list-style: none;
-    width: 192px;
+    width: 559px;
+}
+
+.li-villes:hover{
+    text-decoration: none;
 }
 
 .list-codePostal{
+    list-style: none;
 
 }
 
 .ville-panel{
     border: black solid 1px;
     margin: 6% 0 0 0;
-    width: 100%;
+    width: 600px;
     border-radius: 5px;
     height: 500px;
     overflow: scroll;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+}
+
+input[type=search] {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
 }

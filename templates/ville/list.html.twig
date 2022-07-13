@@ -5,49 +5,53 @@
 {% block body %}
     <div class="titre"><h1>Editions des villes </h1></div>
 
-<div id="full-size">
-    <div class="etiquette-admin">
-        <div class="flex_row">
-    Filtrer les villes
-    Le nom contient :
-    <input type="search" >
-    <button>Rechercher</button>
+    <div id="full-size">
+        <div class="etiquette-admin">
+            <div class="listVilles-flex">
+                <input type="search">
+                <button class="btn-login">Rechercher</button>
 
-    {{ form_start(villeForm) }}
+                {{ form_start(villeForm) }}
 
 
-    <div class="ville-panel">
-        <div class="nom-ville-pannel">
-            <ul class="list-villes">
-                {% for ville in villes %}
-                    <li id="{{ ville.id }}">{{ ville.nom() }}</li>
-                {% endfor %}
-                <li>{{ form_row(villeForm.nom) }}</li>
+                <div class="ville-panel">
+                    <div class="nom-ville-pannel">
+                        <ul class="list-villes">
+                            {% for ville in villes %}
+                                <li class="li-villes" id="{{ ville.id }}">
+                                    {{ ville.nom() }} - {{ ville.codePostal }}
+                                    <b>
+                                        <a href="{{ path('ville_edit', {'id':ville.id()}) }}">Modifier</a> -
+                                        <a href="{{ path('ville_delete', {'id':ville.id()}) }}">Supprimer</a>
+                                    </b>
+                                </li>
+                            {% endfor %}
+                            <li>Nom : {{ form_row(villeForm.nom) }}</li>
+                            <li>Code Postal : {{ form_row(villeForm.codePostal) }}</li>
+                            <li>
+                                <button class="btn-login">Ajouter</button>
+                            </li>
+                        </ul>
+                    </div>
+                    {#<div class="codepostal-ville-pannel">
+                        <ul class="list-codePostal">
+                            {% for ville in villes %}
+                                <li class="li-Villes"  id="{{ ville.id }}">{{ ville.codePostal }}</li>
+                            {% endfor %}
 
-
-
-            </ul>
-        </div>
-        <div class="codepostal-ville-pannel">
-            <ul class="list-villes">
-                {% for ville in villes %}
-                    <li id="{{ ville.id }}">{{ ville.codePostal }}</li>
-                {% endfor %}
-                <li>{{ form_row(villeForm.codePostal) }}</li>
-
-            </ul>
-        </div>
-        <div class="actions-ville-pannel">
-            <ul class="list-villes">
-                {% for ville in villes %}
-                    <li><a href="{{ path('ville_edit', {'id':ville.id()}) }}">Modifier</a> - <a href="{{ path('ville_delete', {'id':ville.id()}) }}">Supprimer</a> </li>
-                {% endfor %}
-                <li><button>Submit</button></li>
-            </ul>
+                        </ul>
+                    </div>
+                    <div class="actions-ville-pannel">
+                        <ul class="list-villes">
+                            {% for ville in villes %}
+                                <li><a href="{{ path('ville_edit', {'id':ville.id()}) }}">Modifier</a> - <a
+                                            href="{{ path('ville_delete', {'id':ville.id()}) }}">Supprimer</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>#}
+                </div>
+                {{ form_end(villeForm) }}
+            </div>
         </div>
     </div>
-    {{ form_end(villeForm) }}
-        </div>
-    </div>
-</div>
 {% endblock %}
